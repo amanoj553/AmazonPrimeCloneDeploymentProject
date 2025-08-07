@@ -23,8 +23,8 @@ pipeline {
 				withSonarQubeEnv ('sonar-server'){
 				    sh """
 					$SONAR_HOME/bin/sonar-scanner \
-					Dsonar.projectName=amazon-prime \
-					Dsonar.projectKey=amazon-prime
+					-Dsonar.projectName=amazon-prime \
+					-Dsonar.projectKey=amazon-prime
 					"""
 				}
             }
