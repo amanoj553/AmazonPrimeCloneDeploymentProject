@@ -2,7 +2,7 @@
 
 instance_type = "t2.medium"
 ami           = "ami-020cba7c55df1f615"   # Ubuntu 24.04
-key_name      = "app-server.pem"                     # Replace with your key-name without .pem extension
+key_name      = "app-server"                     # Replace with your key-name without .pem extension
 volume_size   = 30
 region_name   = "us-east-1"
 server_name   = "JENKINS-SERVER-DEMO"
