@@ -1,0 +1,1998 @@
+# after terraform apply command AWS created resources list
+
+# module.eks.data.aws_caller_identity.current:
+data "aws_caller_identity" "current" {
+    account_id = "047310882558"
+    arn        = "arn:aws:iam::047310882558:user/demo-user"
+    id         = "047310882558"
+    user_id    = "AIDAQWA7SY37C6AE6FHPS"
+}
+
+# module.eks.data.aws_eks_addon_version.this["coredns"]:
+data "aws_eks_addon_version" "this" {
+    addon_name         = "coredns"
+    id                 = "coredns"
+    kubernetes_version = "1.29"
+    most_recent        = true
+    version            = "v1.11.4-eksbuild.14"
+}
+
+# module.eks.data.aws_eks_addon_version.this["kube-proxy"]:
+data "aws_eks_addon_version" "this" {
+    addon_name         = "kube-proxy"
+    id                 = "kube-proxy"
+    kubernetes_version = "1.29"
+    most_recent        = true
+    version            = "v1.29.15-eksbuild.10"
+}
+
+# module.eks.data.aws_eks_addon_version.this["vpc-cni"]:
+data "aws_eks_addon_version" "this" {
+    addon_name         = "vpc-cni"
+    id                 = "vpc-cni"
+    kubernetes_version = "1.29"
+    most_recent        = true
+    version            = "v1.20.0-eksbuild.1"
+}
+
+# module.eks.data.aws_iam_policy_document.assume_role_policy[0]:
+data "aws_iam_policy_document" "assume_role_policy" {
+    id            = "2764486067"
+    json          = jsonencode(
+        {
+            Statement = [
+                {
+                    Action    = "sts:AssumeRole"
+                    Effect    = "Allow"
+                    Principal = {
+                        Service = "eks.amazonaws.com"
+                    }
+                    Sid       = "EKSClusterAssumeRole"
+                },
+            ]
+            Version   = "2012-10-17"
+        }
+    )
+    minified_json = jsonencode(
+        {
+            Statement = [
+                {
+                    Action    = "sts:AssumeRole"
+                    Effect    = "Allow"
+                    Principal = {
+                        Service = "eks.amazonaws.com"
+                    }
+                    Sid       = "EKSClusterAssumeRole"
+                },
+            ]
+            Version   = "2012-10-17"
+        }
+    )
+    version       = "2012-10-17"
+
+    statement {
+        actions       = [
+            "sts:AssumeRole",
+        ]
+        effect        = "Allow"
+        not_actions   = []
+        not_resources = []
+        resources     = []
+        sid           = "EKSClusterAssumeRole"
+
+        principals {
+            identifiers = [
+                "eks.amazonaws.com",
+            ]
+            type        = "Service"
+        }
+    }
+}
+
+# module.eks.data.aws_iam_session_context.current:
+data "aws_iam_session_context" "current" {
+    arn          = "arn:aws:iam::047310882558:user/demo-user"
+    id           = "arn:aws:iam::047310882558:user/demo-user"
+    issuer_arn   = "arn:aws:iam::047310882558:user/demo-user"
+    issuer_id    = null
+    issuer_name  = null
+    session_name = null
+}
+
+# module.eks.data.aws_partition.current:
+data "aws_partition" "current" {
+    dns_suffix         = "amazonaws.com"
+    id                 = "aws"
+    partition          = "aws"
+    reverse_dns_prefix = "com.amazonaws"
+}
+
+# module.eks.data.tls_certificate.this[0]:
+data "tls_certificate" "this" {
+    certificates = [
+        {
+            cert_pem             = <<-EOT
+                -----BEGIN CERTIFICATE-----
+                MIIEdTCCA12gAwIBAgIJAKcOSkw0grd/MA0GCSqGSIb3DQEBCwUAMGgxCzAJBgNV
+                BAYTAlVTMSUwIwYDVQQKExxTdGFyZmllbGQgVGVjaG5vbG9naWVzLCBJbmMuMTIw
+                MAYDVQQLEylTdGFyZmllbGQgQ2xhc3MgMiBDZXJ0aWZpY2F0aW9uIEF1dGhvcml0
+                eTAeFw0wOTA5MDIwMDAwMDBaFw0zNDA2MjgxNzM5MTZaMIGYMQswCQYDVQQGEwJV
+                UzEQMA4GA1UECBMHQXJpem9uYTETMBEGA1UEBxMKU2NvdHRzZGFsZTElMCMGA1UE
+                ChMcU3RhcmZpZWxkIFRlY2hub2xvZ2llcywgSW5jLjE7MDkGA1UEAxMyU3RhcmZp
+                ZWxkIFNlcnZpY2VzIFJvb3QgQ2VydGlmaWNhdGUgQXV0aG9yaXR5IC0gRzIwggEi
+                MA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDVDDrEKvlO4vW+GZdfjohTsR8/
+                y8+fIBNtKTrID30892t2OGPZNmCom15cAICyL1l/9of5JUOG52kbUpqQ4XHj2C0N
+                Tm/2yEnZtvMaVq4rtnQU68/7JuMauh2WLmo7WJSJR1b/JaCTcFOD2oR0FMNnngRo
+                Ot+OQFodSk7PQ5E751bWAHDLUu57fa4657wx+UX2wmDPE1kCK4DMNEffud6QZW0C
+                zyyRpqbn3oUYSXxmTqM6bam17jQuug0DuDPfR+uxa40l2ZvOgdFFRjKWcIfeAg5J
+                Q4W2bHO7ZOphQazJ1FTfhy/HIrImzJ9ZVGif/L4qL8RVHHVAYBeFAlU5i38FAgMB
+                AAGjgfAwge0wDwYDVR0TAQH/BAUwAwEB/zAOBgNVHQ8BAf8EBAMCAYYwHQYDVR0O
+                BBYEFJxfAN+qAdcwKziIorhtSpzyEZGDMB8GA1UdIwQYMBaAFL9ft9HO3R+G9FtV
+                rNzXEMIOqYjnME8GCCsGAQUFBwEBBEMwQTAcBggrBgEFBQcwAYYQaHR0cDovL28u
+                c3MyLnVzLzAhBggrBgEFBQcwAoYVaHR0cDovL3guc3MyLnVzL3guY2VyMCYGA1Ud
+                HwQfMB0wG6AZoBeGFWh0dHA6Ly9zLnNzMi51cy9yLmNybDARBgNVHSAECjAIMAYG
+                BFUdIAAwDQYJKoZIhvcNAQELBQADggEBACMd44pXyn3pF3lM8R5V/cxTbj5HD9/G
+                VfKyBDbtgB9TxF00KGu+x1X8Z+rLP3+QsjPNG1gQggL4+C/1E2DUBc7xgQjB3ad1
+                l08YuW3e95ORCLp+QCztweq7dp4zBncdDQh/U90bZKuCJ/Fp1U1ervShw3WnWEQt
+                8jxwmKy6abaVd38PMV4s/KCHOkdp8Hlf9BRUpJVeEXgSYCfOn8J3/yNTd126/+pZ
+                59vPr5KW7ySaNRB6nJHGDn2Z9j8Z3/VyVOEVqQdZe4O/Ui5GjLIAZHYcSNPYeehu
+                VsyuLAOQ1xk4meTKCRlb/weWsKh/NEnfVqn3sF/tM+2MR7cwA130A4w=
+                -----END CERTIFICATE-----
+            EOT
+            is_ca                = true
+            issuer               = "OU=Starfield Class 2 Certification Authority,O=Starfield Technologies\\, Inc.,C=US"
+            not_after            = "2034-06-28T17:39:16Z"
+            not_before           = "2009-09-02T00:00:00Z"
+            public_key_algorithm = "RSA"
+            serial_number        = "12037640545166866303"
+            sha1_fingerprint     = "9e99a48a9960b14926bb7f3b02e22da2b0ab7280"
+            signature_algorithm  = "SHA256-RSA"
+            subject              = "CN=Starfield Services Root Certificate Authority - G2,O=Starfield Technologies\\, Inc.,L=Scottsdale,ST=Arizona,C=US"
+            version              = 3
+        },
+        {
+            cert_pem             = <<-EOT
+                -----BEGIN CERTIFICATE-----
+                MIIEkjCCA3qgAwIBAgITBn+USionzfP6wq4rAfkI7rnExjANBgkqhkiG9w0BAQsF
+                ADCBmDELMAkGA1UEBhMCVVMxEDAOBgNVBAgTB0FyaXpvbmExEzARBgNVBAcTClNj
+                b3R0c2RhbGUxJTAjBgNVBAoTHFN0YXJmaWVsZCBUZWNobm9sb2dpZXMsIEluYy4x
+                OzA5BgNVBAMTMlN0YXJmaWVsZCBTZXJ2aWNlcyBSb290IENlcnRpZmljYXRlIEF1
+                dGhvcml0eSAtIEcyMB4XDTE1MDUyNTEyMDAwMFoXDTM3MTIzMTAxMDAwMFowOTEL
+                MAkGA1UEBhMCVVMxDzANBgNVBAoTBkFtYXpvbjEZMBcGA1UEAxMQQW1hem9uIFJv
+                b3QgQ0EgMTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALJ4gHHKeNXj
+                ca9HgFB0fW7Y14h29Jlo91ghYPl0hAEvrAIthtOgQ3pOsqTQNroBvo3bSMgHFzZM
+                9O6II8c+6zf1tRn4SWiw3te5djgdYZ6k/oI2peVKVuRF4fn9tBb6dNqcmzU5L/qw
+                IFAGbHrQgLKm+a/sRxmPUDgH3KKHOVj4utWp+UhnMJbulHheb4mjUcAwhmahRWa6
+                VOujw5H5SNz/0egwLX0tdHA114gk957EWW67c4cX8jJGKLhD+rcdqsq08p8kDi1L
+                93FcXmn/6pUCyziKrlA4b9v7LWIbxcceVOF34GfID5yHI9Y/QCB/IIDEgEw+OyQm
+                jgSubJrIqg0CAwEAAaOCATEwggEtMA8GA1UdEwEB/wQFMAMBAf8wDgYDVR0PAQH/
+                BAQDAgGGMB0GA1UdDgQWBBSEGMyFNOy8DJSULghZnMeyEE4KCDAfBgNVHSMEGDAW
+                gBScXwDfqgHXMCs4iKK4bUqc8hGRgzB4BggrBgEFBQcBAQRsMGowLgYIKwYBBQUH
+                MAGGImh0dHA6Ly9vY3NwLnJvb3RnMi5hbWF6b250cnVzdC5jb20wOAYIKwYBBQUH
+                MAKGLGh0dHA6Ly9jcnQucm9vdGcyLmFtYXpvbnRydXN0LmNvbS9yb290ZzIuY2Vy
+                MD0GA1UdHwQ2MDQwMqAwoC6GLGh0dHA6Ly9jcmwucm9vdGcyLmFtYXpvbnRydXN0
+                LmNvbS9yb290ZzIuY3JsMBEGA1UdIAQKMAgwBgYEVR0gADANBgkqhkiG9w0BAQsF
+                AAOCAQEAYjdCXLwQtT6LLOkMm2xF4gcAevnFWAu5CIw+7bMlPLVvUOTNNWqnkzSW
+                MiGpSESrnO09tKpzbeR/FoCJbM8oAxiDR3mjEH4wW6w7sGDgd9QIpuEdfF7Au/ma
+                eyKdpwAJfqxGF4PcnCZXmTA5YpaP7dreqsXMGz7KQ2hsVxa81Q4gLv7/wmpdLqBK
+                bRRYh5TmOTFffHPLkIhqhBGWJ6bt2YFGpn6jcgAKUj6DiAdjd4lpFw85hdKrCEVN
+                0FE6/V1dN2RMfjCyVSRCnTawXZwXgWHxyvkQAiSr6w10kY17RSlQOYiypok1JR4U
+                akcjMS9cmvqtmg5iUaQqqcT5NJ0hGA==
+                -----END CERTIFICATE-----
+            EOT
+            is_ca                = true
+            issuer               = "CN=Starfield Services Root Certificate Authority - G2,O=Starfield Technologies\\, Inc.,L=Scottsdale,ST=Arizona,C=US"
+            not_after            = "2037-12-31T01:00:00Z"
+            not_before           = "2015-05-25T12:00:00Z"
+            public_key_algorithm = "RSA"
+            serial_number        = "144918191876577076464031512351042010504348870"
+            sha1_fingerprint     = "06b25927c42a721631c1efd9431e648fa62e1e39"
+            signature_algorithm  = "SHA256-RSA"
+            subject              = "CN=Amazon Root CA 1,O=Amazon,C=US"
+            version              = 3
+        },
+        {
+            cert_pem             = <<-EOT
+                -----BEGIN CERTIFICATE-----
+                MIIEXjCCA0agAwIBAgITB3MSTNQG0mfAmRzdKZqfODF5hTANBgkqhkiG9w0BAQsF
+                ADA5MQswCQYDVQQGEwJVUzEPMA0GA1UEChMGQW1hem9uMRkwFwYDVQQDExBBbWF6
+                b24gUm9vdCBDQSAxMB4XDTIyMDgyMzIyMjYwNFoXDTMwMDgyMzIyMjYwNFowPDEL
+                MAkGA1UEBhMCVVMxDzANBgNVBAoTBkFtYXpvbjEcMBoGA1UEAxMTQW1hem9uIFJT
+                QSAyMDQ4IE0wMzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALd/pVko
+                8vuM475Tf45HV3BbCl/B9Jy89G1CRkFjcPY06WA9lS+7dWbUA7GtWUKoksr69hKM
+                wcMsNpxlw7b3jeXFgxB09/nmalcAWtnLzF+LaDKEA5DQmvKzuh1nfIfqEiKCQSmX
+                Xh09Xs+dO7cm5qbaL2hhNJCSAejciwcvOFgFNgEMR42wm6KIFHsQW28jhA+1u/M0
+                p6fVwReuEgZfLfdx82Px0LJck3lST3EB/JfbdsdOzzzg5YkY1dfuqf8y5fUeZ7Cz
+                WXbTjujwX/TovmeWKA36VLCz75azW6tDNuDn66FOpADZZ9omVaF6BqNJiLMVl6P3
+                /c0OiUMC6Z5OfKcCAwEAAaOCAVowggFWMBIGA1UdEwEB/wQIMAYBAf8CAQAwDgYD
+                VR0PAQH/BAQDAgGGMB0GA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEFBQcDAjAdBgNV
+                HQ4EFgQUVdkYX9IczAHhWLS+q9lVQgHXLgIwHwYDVR0jBBgwFoAUhBjMhTTsvAyU
+                lC4IWZzHshBOCggwewYIKwYBBQUHAQEEbzBtMC8GCCsGAQUFBzABhiNodHRwOi8v
+                b2NzcC5yb290Y2ExLmFtYXpvbnRydXN0LmNvbTA6BggrBgEFBQcwAoYuaHR0cDov
+                L2NydC5yb290Y2ExLmFtYXpvbnRydXN0LmNvbS9yb290Y2ExLmNlcjA/BgNVHR8E
+                ODA2MDSgMqAwhi5odHRwOi8vY3JsLnJvb3RjYTEuYW1hem9udHJ1c3QuY29tL3Jv
+                b3RjYTEuY3JsMBMGA1UdIAQMMAowCAYGZ4EMAQIBMA0GCSqGSIb3DQEBCwUAA4IB
+                AQAGjeWm2cC+3z2MzSCnte46/7JZvj3iQZDY7EvODNdZF41n71Lrk9kbfNwerK0d
+                VNzW36Wefr7j7ZSwBVg50W5ay65jNSN74TTQV1yt4WnSbVvN6KlMs1hiyOZdoHKs
+                KDV2UGNxbdoBYCQNa2GYF8FQIWLugNp35aSOpMy6cFlymFQomIrnOQHwK1nvVY4q
+                xDSJMU/gNJz17D8ArPN3ngnyZ2TwepJ0uBINz3G5te2rdFUF4i4Y3Bb7FUlHDYm4
+                u8aIRGpk2ZpfXmxaoxnbIBZRvGLPSUuPwnwoUOMsJ8jirI5vs2dvchPb7MtI1rle
+                i02f2ivH2vxkjDLltSpe2fiC
+                -----END CERTIFICATE-----
+            EOT
+            is_ca                = true
+            issuer               = "CN=Amazon Root CA 1,O=Amazon,C=US"
+            not_after            = "2030-08-23T22:26:04Z"
+            not_before           = "2022-08-23T22:26:04Z"
+            public_key_algorithm = "RSA"
+            serial_number        = "166129356476704345391986644047206454194698629"
+            sha1_fingerprint     = "d9fe0a65fa00cabf61f5120d373a8135e1461f15"
+            signature_algorithm  = "SHA256-RSA"
+            subject              = "CN=Amazon RSA 2048 M03,O=Amazon,C=US"
+            version              = 3
+        },
+        {
+            cert_pem             = <<-EOT
+                -----BEGIN CERTIFICATE-----
+                MIIF5zCCBM+gAwIBAgIQB8/B5LYdWaaSLNb9DZLprTANBgkqhkiG9w0BAQsFADA8
+                MQswCQYDVQQGEwJVUzEPMA0GA1UEChMGQW1hem9uMRwwGgYDVQQDExNBbWF6b24g
+                UlNBIDIwNDggTTAzMB4XDTI1MDIyNjAwMDAwMFoXDTI2MDMyNzIzNTk1OVowKDEm
+                MCQGA1UEAwwdKi5la3MudXMtZWFzdC0xLmFtYXpvbmF3cy5jb20wggEiMA0GCSqG
+                SIb3DQEBAQUAA4IBDwAwggEKAoIBAQCoHWcgrIv/D6CxSXSxAq0GuOPoCJqnVz6U
+                Mhp1YLE9OZs3jH8EfYlNpGtqOtLa1vZb8Lp4CZdATHTj1SoK01MwmXXIDm2Jj+Km
+                iQvZ0BBe5xroDWvf3r/LWG/WMkRtR4F+qPb9pVYlM9N3WZdSAKfTQTowGxebugLc
+                M/+ZLvAxxdtaXK+LID6JRKRa2BIRHcfILiNJo7vIS/I+DOqXn9Rb0VFnkpYpGE+k
+                m47kVkFFsToior7zlAwPv6VWsm+zZV9zNnCpu9FpJ3vkZE9OGHS6aChtSya2Qpyr
+                jyF98KIFTQ+FKtDZHf9XLHmV5v/IP2bWk7lzmPYW4PwcPhDUmC9PAgMBAAGjggL3
+                MIIC8zAfBgNVHSMEGDAWgBRV2Rhf0hzMAeFYtL6r2VVCAdcuAjAdBgNVHQ4EFgQU
+                6mCbzMC1FaJuw7tKpv7muQZDZrowKAYDVR0RBCEwH4IdKi5la3MudXMtZWFzdC0x
+                LmFtYXpvbmF3cy5jb20wEwYDVR0gBAwwCjAIBgZngQwBAgEwDgYDVR0PAQH/BAQD
+                AgWgMB0GA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEFBQcDAjA7BgNVHR8ENDAyMDCg
+                LqAshipodHRwOi8vY3JsLnIybTAzLmFtYXpvbnRydXN0LmNvbS9yMm0wMy5jcmww
+                dQYIKwYBBQUHAQEEaTBnMC0GCCsGAQUFBzABhiFodHRwOi8vb2NzcC5yMm0wMy5h
+                bWF6b250cnVzdC5jb20wNgYIKwYBBQUHMAKGKmh0dHA6Ly9jcnQucjJtMDMuYW1h
+                em9udHJ1c3QuY29tL3IybTAzLmNlcjAMBgNVHRMBAf8EAjAAMIIBfwYKKwYBBAHW
+                eQIEAgSCAW8EggFrAWkAdgAOV5S8866pPjMbLJkHs/eQ35vCPXEyJd0hqSWsYcVO
+                IQAAAZVBW4SGAAAEAwBHMEUCIQC+CghIdRNpEnK+JGxaeHOel/pYJSUsog1eklre
+                LGmoTwIgAj1vm4d6u/93S7GVfw7qotajiMfgHeEf7lANQf0mxf4AdgBkEcRspBLs
+                p4kcogIuALyrTygH1B41J6vq/tUDyX3N8AAAAZVBW4Q1AAAEAwBHMEUCIAYyeDIv
+                JD1IhUkb1E59cbCwTcAYChrSArEZOOAib3dJAiEAix8XjjqXhMNuji/u2fzLxeZ7
+                c5PCtDHWx3Ky7QYBfCUAdwBJnJtp3h187Pw23s2HZKa4W68Kh4AZ0VVS++nrKd34
+                wwAAAZVBW4RMAAAEAwBIMEYCIQCsj67XcK6jtETNJEPTYPaFqJOMlNtM0TeJwGhm
+                Bc81sQIhAJoirhaQzC4ydAzLvjpVqKYyuqLktiHkTqFq8IGxBAkIMA0GCSqGSIb3
+                DQEBCwUAA4IBAQAjjE2au5fdV/DrlD3e5zZ5hTB4CicIARTWvJQ6EsQm/vbXPoUY
+                SHRZkOodq0AJWEC/RImGu8bnVY8RzGsELkMzI4A8UxdlH2YGP8obg6MfP6yGZaHM
+                nS4wLX05EnmrABaoRB/apt7tE4w+yRa7QoxUgiTPpFzaQVv1mTcGaWMG55U8tPg7
+                LXm539O4OBukbP8HNvjBZ8+N0RYrtG0u0M4FMX1hMKG0bkjJiU6MVZfGJWcgp7I4
+                bd5cj5SfE1EHL70P7ELaocXjnWKbys9Mc870aoRXVfAC4bZWU6F9Ke3O7ioXXd5L
+                0mKQwrjkiglpYaXc247Qi8IUCdk6s13xHJ4e
+                -----END CERTIFICATE-----
+            EOT
+            is_ca                = false
+            issuer               = "CN=Amazon RSA 2048 M03,O=Amazon,C=US"
+            not_after            = "2026-03-27T23:59:59Z"
+            not_before           = "2025-02-26T00:00:00Z"
+            public_key_algorithm = "RSA"
+            serial_number        = "10383334045647432453656403708671617453"
+            sha1_fingerprint     = "63462dda480d8b900e0a7dbfaf6238a62ba4fce0"
+            signature_algorithm  = "SHA256-RSA"
+            subject              = "CN=*.eks.us-east-1.amazonaws.com"
+            version              = 3
+        },
+    ]
+    id           = "922877a0975ad078a65b8ff11ebc47b8311945c7"
+    url          = "https://oidc.eks.us-east-1.amazonaws.com/id/126281AD7AD91CD820EC73A1768D0DEC"
+    verify_chain = true
+}
+
+# module.eks.aws_cloudwatch_log_group.this[0]:
+resource "aws_cloudwatch_log_group" "this" {
+    arn               = "arn:aws:logs:us-east-1:047310882558:log-group:/aws/eks/amazon-prime-cluster/cluster"
+    id                = "/aws/eks/amazon-prime-cluster/cluster"
+    kms_key_id        = null
+    log_group_class   = "STANDARD"
+    name              = "/aws/eks/amazon-prime-cluster/cluster"
+    name_prefix       = null
+    retention_in_days = 90
+    skip_destroy      = false
+    tags              = {
+        "Environment" = "dev"
+        "Example"     = "amazon-prime-cluster"
+        "Name"        = "/aws/eks/amazon-prime-cluster/cluster"
+    }
+    tags_all          = {
+        "Environment" = "dev"
+        "Example"     = "amazon-prime-cluster"
+        "Name"        = "/aws/eks/amazon-prime-cluster/cluster"
+    }
+}
+
+# module.eks.aws_ec2_tag.cluster_primary_security_group["Environment"]:
+resource "aws_ec2_tag" "cluster_primary_security_group" {
+    id          = "sg-0219cd5afb5f98647,Environment"
+    key         = "Environment"
+    resource_id = "sg-0219cd5afb5f98647"
+    value       = "dev"
+}
+
+# module.eks.aws_ec2_tag.cluster_primary_security_group["Example"]:
+resource "aws_ec2_tag" "cluster_primary_security_group" {
+    id          = "sg-0219cd5afb5f98647,Example"
+    key         = "Example"
+    resource_id = "sg-0219cd5afb5f98647"
+    value       = "amazon-prime-cluster"
+}
+
+# module.eks.aws_eks_addon.this["coredns"]:
+resource "aws_eks_addon" "this" {
+    addon_name               = "coredns"
+    addon_version            = "v1.11.4-eksbuild.14"
+    arn                      = "arn:aws:eks:us-east-1:047310882558:addon/amazon-prime-cluster/coredns/04cc42f1-6a6e-a55d-54c1-c7d4e21284bf"
+    cluster_name             = "amazon-prime-cluster"
+    configuration_values     = null
+    created_at               = "2025-08-07T18:54:52Z"
+    id                       = "amazon-prime-cluster:coredns"
+    modified_at              = "2025-08-07T18:55:34Z"
+    resolve_conflicts        = "OVERWRITE"
+    service_account_role_arn = null
+    tags                     = {
+        "Environment" = "dev"
+        "Example"     = "amazon-prime-cluster"
+    }
+    tags_all                 = {
+        "Environment" = "dev"
+        "Example"     = "amazon-prime-cluster"
+    }
+
+    timeouts {}
+}
+
+# module.eks.aws_eks_addon.this["kube-proxy"]:
+resource "aws_eks_addon" "this" {
+    addon_name               = "kube-proxy"
+    addon_version            = "v1.29.15-eksbuild.10"
+    arn                      = "arn:aws:eks:us-east-1:047310882558:addon/amazon-prime-cluster/kube-proxy/fccc42f1-6a68-3f03-5e42-78d0ed652c1b"
+    cluster_name             = "amazon-prime-cluster"
+    configuration_values     = null
+    created_at               = "2025-08-07T18:54:52Z"
+    id                       = "amazon-prime-cluster:kube-proxy"
+    modified_at              = "2025-08-07T18:55:29Z"
+    resolve_conflicts        = "OVERWRITE"
+    service_account_role_arn = null
+    tags                     = {
+        "Environment" = "dev"
+        "Example"     = "amazon-prime-cluster"
+    }
+    tags_all                 = {
+        "Environment" = "dev"
+        "Example"     = "amazon-prime-cluster"
+    }
+
+    timeouts {}
+}
+
+# module.eks.aws_eks_addon.this["vpc-cni"]:
+resource "aws_eks_addon" "this" {
+    addon_name               = "vpc-cni"
+    addon_version            = "v1.20.0-eksbuild.1"
+    arn                      = "arn:aws:eks:us-east-1:047310882558:addon/amazon-prime-cluster/vpc-cni/04cc42f1-6a6e-295d-3f7f-b14bc6a4a82b"
+    cluster_name             = "amazon-prime-cluster"
+    configuration_values     = null
+    created_at               = "2025-08-07T18:54:52Z"
+    id                       = "amazon-prime-cluster:vpc-cni"
+    modified_at              = "2025-08-07T18:55:29Z"
+    resolve_conflicts        = "OVERWRITE"
+    service_account_role_arn = null
+    tags                     = {
+        "Environment" = "dev"
+        "Example"     = "amazon-prime-cluster"
+    }
+    tags_all                 = {
+        "Environment" = "dev"
+        "Example"     = "amazon-prime-cluster"
+    }
+
+    timeouts {}
+}
+
+# module.eks.aws_eks_cluster.this[0]:
+resource "aws_eks_cluster" "this" {
+    arn                           = "arn:aws:eks:us-east-1:047310882558:cluster/amazon-prime-cluster"
+    bootstrap_self_managed_addons = true
+    certificate_authority         = [
+        {
+            data = "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCVENDQWUyZ0F3SUJBZ0lJTUxDWi8xSUZISXd3RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5TlRBNE1EY3hPRE01TUROYUZ3MHpOVEE0TURVeE9EUTBNRE5hTUJVeApFekFSQmdOVkJBTVRDbXQxWW1WeWJtVjBaWE13Z2dFaU1BMEdDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLCkFvSUJBUURjTDZuK3BmZ1ZXcWlKZVdiUnVmOFMxUmFYOTkzSGdpdHVOa0VsQ0Q0K3U5UTY3THd1RjdXc1drcFQKTldmZDhoNGd1ODVydWpmN25UYksrb1VDQ1FZOVhBaHlqWmJyWGZ4YzN5SDJ0K0tudFhaWkV1LytnUTNuWjRUTgorbm5vUzJmdW5nS0pNbmpISHpsZXJGUi83OFdOSXAyL1BoSkpsUXFUcFIzd3dQSlBpRTY0RGlWWEhOaEg3ZFBMCktBRkNyd1ZxMEVlMU15TkhTay9OQWdiNUJCK08yNnR6SzFaamd1amtWb3BNK0Ywb3R2MUxlTGUzNXNuRyt1Y3MKM1J1cE9LNHdyQTdtWG1Lb2RIM0NuNWNHQWE2enVlVnZnWFB4MnIyY2JoTHN0TE5CMnZGOU1PSXJoTUp0cGxKVwpKNkozVkRGK2RrdlZRRU96WmordkN4Z3ZIdGF6QWdNQkFBR2pXVEJYTUE0R0ExVWREd0VCL3dRRUF3SUNwREFQCkJnTlZIUk1CQWY4RUJUQURBUUgvTUIwR0ExVWREZ1FXQkJUVFZ3YTJYckcyR0JSSDZzSldscDZvWjB1K2NqQVYKQmdOVkhSRUVEakFNZ2dwcmRXSmxjbTVsZEdWek1BMEdDU3FHU0liM0RRRUJDd1VBQTRJQkFRQXROa0lXMjRJTQpReTdLa2R4bGRJSGcxZDEzakZVNS9RN0QrY0xGcS9xQU4yRlpOYlpJbkZFck5JcFYrTHQrWHFCaGV5N0xVSE1hCnVoTW5wWDRPOG1UMVhudFIvdjFTZ3A3ek1hazZqendTc28zYUlEYmJ2cll4ZW8rdTdldFZkbmFhWDMrR0h2a3QKV1dpSzRSNG9yWUQvZXE4T2dWZzBSYXU2emx1aVFiUjI4cTJuVkdhTWpnV09FSTNsdGVZT3JuYTZHcUZBNHV1Wgo3QnNMb3kyNkxIVWJVM08wbGZFcTZDUFNRTVNVM3lYb3Y4OVFVMGRrb01vWU1EOG91YTNZOWVWcHV0SGtLZktOCmVZazNJdTkzU2lJMVBDQzIxdHBacjNHODNxL0llRzZSZ0g1dHg3d1dxZXd4YzB0MFpWWnorZEdVNkdWUnJMc2oKdHlEeVhMdHFKYkpZCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K"
+        },
+    ]
+    created_at                    = "2025-08-07T18:39:10Z"
+    enabled_cluster_log_types     = [
+        "api",
+        "audit",
+        "authenticator",
+    ]
+    endpoint                      = "https://126281AD7AD91CD820EC73A1768D0DEC.gr7.us-east-1.eks.amazonaws.com"
+    id                            = "amazon-prime-cluster"
+    identity                      = [
+        {
+            oidc = [
+                {
+                    issuer = "https://oidc.eks.us-east-1.amazonaws.com/id/126281AD7AD91CD820EC73A1768D0DEC"
+                },
+            ]
+        },
+    ]
+    name                          = "amazon-prime-cluster"
+    platform_version              = "eks.43"
+    role_arn                      = "arn:aws:iam::047310882558:role/amazon-prime-cluster-cluster-20250807183824971400000002"
+    status                        = "ACTIVE"
+    tags                          = {
+        "Environment" = "dev"
+        "Example"     = "amazon-prime-cluster"
+    }
+    tags_all                      = {
+        "Environment" = "dev"
+        "Example"     = "amazon-prime-cluster"
+    }
+    version                       = "1.29"
+
+    access_config {
+        authentication_mode                         = "CONFIG_MAP"
+        bootstrap_cluster_creator_admin_permissions = true
+    }
+
+    encryption_config {
+        resources = [
+            "secrets",
+        ]
+
+        provider {
+            key_arn = "arn:aws:kms:us-east-1:047310882558:key/1faadc03-b407-43a6-8e16-0e759eb02733"
+        }
+    }
+
+    kubernetes_network_config {
+        ip_family         = "ipv4"
+        service_ipv4_cidr = "172.20.0.0/16"
+        service_ipv6_cidr = null
+
+        elastic_load_balancing {
+            enabled = false
+        }
+    }
+
+    timeouts {}
+
+    upgrade_policy {
+        support_type = "EXTENDED"
+    }
+
+    vpc_config {
+        cluster_security_group_id = "sg-0219cd5afb5f98647"
+        endpoint_private_access   = true
+        endpoint_public_access    = true
+        public_access_cidrs       = [
+            "0.0.0.0/0",
+        ]
+        security_group_ids        = [
+            "sg-0af377f1b38908d7a",
+        ]
+        subnet_ids                = [
+            "subnet-020e5215a6883a469",
+            "subnet-09bfcd7e4cf4cc21d",
+        ]
+        vpc_id                    = "vpc-03eaf812acbc2b9e4"
+    }
+}
+
+# module.eks.aws_iam_openid_connect_provider.oidc_provider[0]:
+resource "aws_iam_openid_connect_provider" "oidc_provider" {
+    arn             = "arn:aws:iam::047310882558:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/126281AD7AD91CD820EC73A1768D0DEC"
+    client_id_list  = [
+        "sts.amazonaws.com",
+    ]
+    id              = "arn:aws:iam::047310882558:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/126281AD7AD91CD820EC73A1768D0DEC"
+    tags            = {
+        "Environment" = "dev"
+        "Example"     = "amazon-prime-cluster"
+        "Name"        = "amazon-prime-cluster-eks-irsa"
+    }
+    tags_all        = {
+        "Environment" = "dev"
+        "Example"     = "amazon-prime-cluster"
+        "Name"        = "amazon-prime-cluster-eks-irsa"
+    }
+    thumbprint_list = [
+        "9e99a48a9960b14926bb7f3b02e22da2b0ab7280",
+        "06b25927c42a721631c1efd9431e648fa62e1e39",
+        "d9fe0a65fa00cabf61f5120d373a8135e1461f15",
+        "63462dda480d8b900e0a7dbfaf6238a62ba4fce0",
+    ]
+    url             = "oidc.eks.us-east-1.amazonaws.com/id/126281AD7AD91CD820EC73A1768D0DEC"
+}
+
+# module.eks.aws_iam_policy.cluster_encryption[0]:
+resource "aws_iam_policy" "cluster_encryption" {
+    arn              = "arn:aws:iam::047310882558:policy/amazon-prime-cluster-cluster-ClusterEncryption20250807183859915400000010"
+    attachment_count = 0
+    description      = "Cluster encryption policy to allow cluster role to utilize CMK provided"
+    id               = "arn:aws:iam::047310882558:policy/amazon-prime-cluster-cluster-ClusterEncryption20250807183859915400000010"
+    name             = "amazon-prime-cluster-cluster-ClusterEncryption20250807183859915400000010"
+    name_prefix      = "amazon-prime-cluster-cluster-ClusterEncryption"
+    path             = "/"
+    policy           = jsonencode(
+        {
+            Statement = [
+                {
+                    Action   = [
+                        "kms:Encrypt",
+                        "kms:Decrypt",
+                        "kms:ListGrants",
+                        "kms:DescribeKey",
+                    ]
+                    Effect   = "Allow"
+                    Resource = "arn:aws:kms:us-east-1:047310882558:key/1faadc03-b407-43a6-8e16-0e759eb02733"
+                },
+            ]
+            Version   = "2012-10-17"
+        }
+    )
+    policy_id        = "ANPAQWA7SY37F4O6SZSQL"
+    tags             = {
+        "Environment" = "dev"
+        "Example"     = "amazon-prime-cluster"
+    }
+    tags_all         = {
+        "Environment" = "dev"
+        "Example"     = "amazon-prime-cluster"
+    }
+}
+
+# module.eks.aws_iam_role.this[0]:
+resource "aws_iam_role" "this" {
+    arn                   = "arn:aws:iam::047310882558:role/amazon-prime-cluster-cluster-20250807183824971400000002"
+    assume_role_policy    = jsonencode(
+        {
+            Statement = [
+                {
+                    Action    = "sts:AssumeRole"
+                    Effect    = "Allow"
+                    Principal = {
+                        Service = "eks.amazonaws.com"
+                    }
+                    Sid       = "EKSClusterAssumeRole"
+                },
+            ]
+            Version   = "2012-10-17"
+        }
+    )
+    create_date           = "2025-08-07T18:38:26Z"
+    description           = null
+    force_detach_policies = true
+    id                    = "amazon-prime-cluster-cluster-20250807183824971400000002"
+    managed_policy_arns   = []
+    max_session_duration  = 3600
+    name                  = "amazon-prime-cluster-cluster-20250807183824971400000002"
+    name_prefix           = "amazon-prime-cluster-cluster-"
+    path                  = "/"
+    permissions_boundary  = null
+    tags                  = {
+        "Environment" = "dev"
+        "Example"     = "amazon-prime-cluster"
+    }
+    tags_all              = {
+        "Environment" = "dev"
+        "Example"     = "amazon-prime-cluster"
+    }
+    unique_id             = "AROAQWA7SY37K2DSHKQ2L"
+
+    inline_policy {
+        name   = "amazon-prime-cluster-cluster"
+        policy = jsonencode(
+            {
+                Statement = [
+                    {
+                        Action   = [
+                            "logs:CreateLogGroup",
+                        ]
+                        Effect   = "Deny"
+                        Resource = "*"
+                    },
+                ]
+                Version   = "2012-10-17"
+            }
+        )
+    }
+}
+
+# module.eks.aws_iam_role_policy_attachment.cluster_encryption[0]:
+resource "aws_iam_role_policy_attachment" "cluster_encryption" {
+    id         = "amazon-prime-cluster-cluster-20250807183824971400000002-20250807183901648500000011"
+    policy_arn = "arn:aws:iam::047310882558:policy/amazon-prime-cluster-cluster-ClusterEncryption20250807183859915400000010"
+    role       = "amazon-prime-cluster-cluster-20250807183824971400000002"
+}
+
+# module.eks.aws_iam_role_policy_attachment.this["AmazonEKSClusterPolicy"]:
+resource "aws_iam_role_policy_attachment" "this" {
+    id         = "amazon-prime-cluster-cluster-20250807183824971400000002-20250807183829658700000006"
+    policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
+    role       = "amazon-prime-cluster-cluster-20250807183824971400000002"
+}
+
+# module.eks.aws_iam_role_policy_attachment.this["AmazonEKSVPCResourceController"]:
+resource "aws_iam_role_policy_attachment" "this" {
+    id         = "amazon-prime-cluster-cluster-20250807183824971400000002-20250807183829695300000007"
+    policy_arn = "arn:aws:iam::aws:policy/AmazonEKSVPCResourceController"
+    role       = "amazon-prime-cluster-cluster-20250807183824971400000002"
+}
+
+# module.eks.aws_security_group.cluster[0]:
+resource "aws_security_group" "cluster" {
+    arn                    = "arn:aws:ec2:us-east-1:047310882558:security-group/sg-0af377f1b38908d7a"
+    description            = "EKS cluster security group"
+    egress                 = []
+    id                     = "sg-0af377f1b38908d7a"
+    ingress                = []
+    name                   = "amazon-prime-cluster-cluster-2025080718384231930000000a"
+    name_prefix            = "amazon-prime-cluster-cluster-"
+    owner_id               = "047310882558"
+    revoke_rules_on_delete = false
+    tags                   = {
+        "Environment" = "dev"
+        "Example"     = "amazon-prime-cluster"
+        "Name"        = "amazon-prime-cluster-cluster"
+    }
+    tags_all               = {
+        "Environment" = "dev"
+        "Example"     = "amazon-prime-cluster"
+        "Name"        = "amazon-prime-cluster-cluster"
+    }
+    vpc_id                 = "vpc-03eaf812acbc2b9e4"
+}
+
+# module.eks.aws_security_group.node[0]:
+resource "aws_security_group" "node" {
+    arn                    = "arn:aws:ec2:us-east-1:047310882558:security-group/sg-0ab423fbe0de970ca"
+    description            = "EKS node shared security group"
+    egress                 = []
+    id                     = "sg-0ab423fbe0de970ca"
+    ingress                = []
+    name                   = "amazon-prime-cluster-node-20250807183842285900000008"
+    name_prefix            = "amazon-prime-cluster-node-"
+    owner_id               = "047310882558"
+    revoke_rules_on_delete = false
+    tags                   = {
+        "Environment"                                = "dev"
+        "Example"                                    = "amazon-prime-cluster"
+        "Name"                                       = "amazon-prime-cluster-node"
+        "kubernetes.io/cluster/amazon-prime-cluster" = "owned"
+    }
+    tags_all               = {
+        "Environment"                                = "dev"
+        "Example"                                    = "amazon-prime-cluster"
+        "Name"                                       = "amazon-prime-cluster-node"
+        "kubernetes.io/cluster/amazon-prime-cluster" = "owned"
+    }
+    vpc_id                 = "vpc-03eaf812acbc2b9e4"
+}
+
+# module.eks.aws_security_group_rule.cluster["ingress_nodes_443"]:
+resource "aws_security_group_rule" "cluster" {
+    description              = "Node groups to cluster API"
+    from_port                = 443
+    id                       = "sgrule-2230363798"
+    protocol                 = "tcp"
+    security_group_id        = "sg-0af377f1b38908d7a"
+    security_group_rule_id   = "sgr-0c690b41e8b75fa13"
+    self                     = false
+    source_security_group_id = "sg-0ab423fbe0de970ca"
+    to_port                  = 443
+    type                     = "ingress"
+}
+
+# module.eks.aws_security_group_rule.node["egress_all"]:
+resource "aws_security_group_rule" "node" {
+    cidr_blocks            = [
+        "0.0.0.0/0",
+    ]
+    description            = "Allow all egress"
+    from_port              = 0
+    id                     = "sgrule-3843386954"
+    prefix_list_ids        = []
+    protocol               = "-1"
+    security_group_id      = "sg-0ab423fbe0de970ca"
+    security_group_rule_id = "sgr-0b73383b10224bbfb"
+    self                   = false
+    to_port                = 0
+    type                   = "egress"
+}
+
+# module.eks.aws_security_group_rule.node["ingress_cluster_443"]:
+resource "aws_security_group_rule" "node" {
+    description              = "Cluster API to node groups"
+    from_port                = 443
+    id                       = "sgrule-1111843330"
+    prefix_list_ids          = []
+    protocol                 = "tcp"
+    security_group_id        = "sg-0ab423fbe0de970ca"
+    security_group_rule_id   = "sgr-078ba394c6b1b7e6a"
+    self                     = false
+    source_security_group_id = "sg-0af377f1b38908d7a"
+    to_port                  = 443
+    type                     = "ingress"
+}
+
+# module.eks.aws_security_group_rule.node["ingress_cluster_4443_webhook"]:
+resource "aws_security_group_rule" "node" {
+    description              = "Cluster API to node 4443/tcp webhook"
+    from_port                = 4443
+    id                       = "sgrule-404526943"
+    prefix_list_ids          = []
+    protocol                 = "tcp"
+    security_group_id        = "sg-0ab423fbe0de970ca"
+    security_group_rule_id   = "sgr-07fa6c57e7d7dcb30"
+    self                     = false
+    source_security_group_id = "sg-0af377f1b38908d7a"
+    to_port                  = 4443
+    type                     = "ingress"
+}
+
+# module.eks.aws_security_group_rule.node["ingress_cluster_6443_webhook"]:
+resource "aws_security_group_rule" "node" {
+    description              = "Cluster API to node 6443/tcp webhook"
+    from_port                = 6443
+    id                       = "sgrule-3512660169"
+    prefix_list_ids          = []
+    protocol                 = "tcp"
+    security_group_id        = "sg-0ab423fbe0de970ca"
+    security_group_rule_id   = "sgr-0f6590108a712883d"
+    self                     = false
+    source_security_group_id = "sg-0af377f1b38908d7a"
+    to_port                  = 6443
+    type                     = "ingress"
+}
+
+# module.eks.aws_security_group_rule.node["ingress_cluster_8443_webhook"]:
+resource "aws_security_group_rule" "node" {
+    description              = "Cluster API to node 8443/tcp webhook"
+    from_port                = 8443
+    id                       = "sgrule-3254963432"
+    prefix_list_ids          = []
+    protocol                 = "tcp"
+    security_group_id        = "sg-0ab423fbe0de970ca"
+    security_group_rule_id   = "sgr-05dd5fb5e6ac53c31"
+    self                     = false
+    source_security_group_id = "sg-0af377f1b38908d7a"
+    to_port                  = 8443
+    type                     = "ingress"
+}
+
+# module.eks.aws_security_group_rule.node["ingress_cluster_9443_webhook"]:
+resource "aws_security_group_rule" "node" {
+    description              = "Cluster API to node 9443/tcp webhook"
+    from_port                = 9443
+    id                       = "sgrule-2795765539"
+    prefix_list_ids          = []
+    protocol                 = "tcp"
+    security_group_id        = "sg-0ab423fbe0de970ca"
+    security_group_rule_id   = "sgr-0dcdb603dabd13209"
+    self                     = false
+    source_security_group_id = "sg-0af377f1b38908d7a"
+    to_port                  = 9443
+    type                     = "ingress"
+}
+
+# module.eks.aws_security_group_rule.node["ingress_cluster_kubelet"]:
+resource "aws_security_group_rule" "node" {
+    description              = "Cluster API to node kubelets"
+    from_port                = 10250
+    id                       = "sgrule-1639464706"
+    prefix_list_ids          = []
+    protocol                 = "tcp"
+    security_group_id        = "sg-0ab423fbe0de970ca"
+    security_group_rule_id   = "sgr-00ca3d64e8204031f"
+    self                     = false
+    source_security_group_id = "sg-0af377f1b38908d7a"
+    to_port                  = 10250
+    type                     = "ingress"
+}
+
+# module.eks.aws_security_group_rule.node["ingress_nodes_ephemeral"]:
+resource "aws_security_group_rule" "node" {
+    description            = "Node to node ingress on ephemeral ports"
+    from_port              = 1025
+    id                     = "sgrule-2724243418"
+    prefix_list_ids        = []
+    protocol               = "tcp"
+    security_group_id      = "sg-0ab423fbe0de970ca"
+    security_group_rule_id = "sgr-00c596f4449aa2568"
+    self                   = true
+    to_port                = 65535
+    type                   = "ingress"
+}
+
+# module.eks.aws_security_group_rule.node["ingress_self_coredns_tcp"]:
+resource "aws_security_group_rule" "node" {
+    description            = "Node to node CoreDNS"
+    from_port              = 53
+    id                     = "sgrule-349740087"
+    prefix_list_ids        = []
+    protocol               = "tcp"
+    security_group_id      = "sg-0ab423fbe0de970ca"
+    security_group_rule_id = "sgr-0af01ec3fd1cb251b"
+    self                   = true
+    to_port                = 53
+    type                   = "ingress"
+}
+
+# module.eks.aws_security_group_rule.node["ingress_self_coredns_udp"]:
+resource "aws_security_group_rule" "node" {
+    description            = "Node to node CoreDNS UDP"
+    from_port              = 53
+    id                     = "sgrule-2961653720"
+    prefix_list_ids        = []
+    protocol               = "udp"
+    security_group_id      = "sg-0ab423fbe0de970ca"
+    security_group_rule_id = "sgr-02452f7e0e6c7c57d"
+    self                   = true
+    to_port                = 53
+    type                   = "ingress"
+}
+
+# module.eks.time_sleep.this[0]:
+resource "time_sleep" "this" {
+    create_duration = "30s"
+    id              = "2025-08-07T18:49:06Z"
+    triggers        = {
+        "cluster_certificate_authority_data" = "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURCVENDQWUyZ0F3SUJBZ0lJTUxDWi8xSUZISXd3RFFZSktvWklodmNOQVFFTEJRQXdGVEVUTUJFR0ExVUUKQXhNS2EzVmlaWEp1WlhSbGN6QWVGdzB5TlRBNE1EY3hPRE01TUROYUZ3MHpOVEE0TURVeE9EUTBNRE5hTUJVeApFekFSQmdOVkJBTVRDbXQxWW1WeWJtVjBaWE13Z2dFaU1BMEdDU3FHU0liM0RRRUJBUVVBQTRJQkR3QXdnZ0VLCkFvSUJBUURjTDZuK3BmZ1ZXcWlKZVdiUnVmOFMxUmFYOTkzSGdpdHVOa0VsQ0Q0K3U5UTY3THd1RjdXc1drcFQKTldmZDhoNGd1ODVydWpmN25UYksrb1VDQ1FZOVhBaHlqWmJyWGZ4YzN5SDJ0K0tudFhaWkV1LytnUTNuWjRUTgorbm5vUzJmdW5nS0pNbmpISHpsZXJGUi83OFdOSXAyL1BoSkpsUXFUcFIzd3dQSlBpRTY0RGlWWEhOaEg3ZFBMCktBRkNyd1ZxMEVlMU15TkhTay9OQWdiNUJCK08yNnR6SzFaamd1amtWb3BNK0Ywb3R2MUxlTGUzNXNuRyt1Y3MKM1J1cE9LNHdyQTdtWG1Lb2RIM0NuNWNHQWE2enVlVnZnWFB4MnIyY2JoTHN0TE5CMnZGOU1PSXJoTUp0cGxKVwpKNkozVkRGK2RrdlZRRU96WmordkN4Z3ZIdGF6QWdNQkFBR2pXVEJYTUE0R0ExVWREd0VCL3dRRUF3SUNwREFQCkJnTlZIUk1CQWY4RUJUQURBUUgvTUIwR0ExVWREZ1FXQkJUVFZ3YTJYckcyR0JSSDZzSldscDZvWjB1K2NqQVYKQmdOVkhSRUVEakFNZ2dwcmRXSmxjbTVsZEdWek1BMEdDU3FHU0liM0RRRUJDd1VBQTRJQkFRQXROa0lXMjRJTQpReTdLa2R4bGRJSGcxZDEzakZVNS9RN0QrY0xGcS9xQU4yRlpOYlpJbkZFck5JcFYrTHQrWHFCaGV5N0xVSE1hCnVoTW5wWDRPOG1UMVhudFIvdjFTZ3A3ek1hazZqendTc28zYUlEYmJ2cll4ZW8rdTdldFZkbmFhWDMrR0h2a3QKV1dpSzRSNG9yWUQvZXE4T2dWZzBSYXU2emx1aVFiUjI4cTJuVkdhTWpnV09FSTNsdGVZT3JuYTZHcUZBNHV1Wgo3QnNMb3kyNkxIVWJVM08wbGZFcTZDUFNRTVNVM3lYb3Y4OVFVMGRrb01vWU1EOG91YTNZOWVWcHV0SGtLZktOCmVZazNJdTkzU2lJMVBDQzIxdHBacjNHODNxL0llRzZSZ0g1dHg3d1dxZXd4YzB0MFpWWnorZEdVNkdWUnJMc2oKdHlEeVhMdHFKYkpZCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K"
+        "cluster_endpoint"                   = "https://126281AD7AD91CD820EC73A1768D0DEC.gr7.us-east-1.eks.amazonaws.com"
+        "cluster_name"                       = "amazon-prime-cluster"
+        "cluster_version"                    = "1.29"
+    }
+}
+
+
+# module.eks.module.eks_managed_node_group["panda-node"].data.aws_caller_identity.current:
+data "aws_caller_identity" "current" {
+    account_id = "047310882558"
+    arn        = "arn:aws:iam::047310882558:user/demo-user"
+    id         = "047310882558"
+    user_id    = "AIDAQWA7SY37C6AE6FHPS"
+}
+
+# module.eks.module.eks_managed_node_group["panda-node"].data.aws_iam_policy_document.assume_role_policy[0]:
+data "aws_iam_policy_document" "assume_role_policy" {
+    id            = "2560088296"
+    json          = jsonencode(
+        {
+            Statement = [
+                {
+                    Action    = "sts:AssumeRole"
+                    Effect    = "Allow"
+                    Principal = {
+                        Service = "ec2.amazonaws.com"
+                    }
+                    Sid       = "EKSNodeAssumeRole"
+                },
+            ]
+            Version   = "2012-10-17"
+        }
+    )
+    minified_json = jsonencode(
+        {
+            Statement = [
+                {
+                    Action    = "sts:AssumeRole"
+                    Effect    = "Allow"
+                    Principal = {
+                        Service = "ec2.amazonaws.com"
+                    }
+                    Sid       = "EKSNodeAssumeRole"
+                },
+            ]
+            Version   = "2012-10-17"
+        }
+    )
+    version       = "2012-10-17"
+
+    statement {
+        actions       = [
+            "sts:AssumeRole",
+        ]
+        effect        = "Allow"
+        not_actions   = []
+        not_resources = []
+        resources     = []
+        sid           = "EKSNodeAssumeRole"
+
+        principals {
+            identifiers = [
+                "ec2.amazonaws.com",
+            ]
+            type        = "Service"
+        }
+    }
+}
+
+# module.eks.module.eks_managed_node_group["panda-node"].data.aws_partition.current:
+data "aws_partition" "current" {
+    dns_suffix         = "amazonaws.com"
+    id                 = "aws"
+    partition          = "aws"
+    reverse_dns_prefix = "com.amazonaws"
+}
+
+# module.eks.module.eks_managed_node_group["panda-node"].aws_eks_node_group.this[0]:
+resource "aws_eks_node_group" "this" {
+    ami_type               = "AL2_x86_64"
+    arn                    = "arn:aws:eks:us-east-1:047310882558:nodegroup/amazon-prime-cluster/panda-node-20250807184914852600000014/96cc42ee-d8af-369f-a1e4-c92d7fc250ab"
+    capacity_type          = "SPOT"
+    cluster_name           = "amazon-prime-cluster"
+    disk_size              = 0
+    id                     = "amazon-prime-cluster:panda-node-20250807184914852600000014"
+    instance_types         = [
+        "t2.medium",
+    ]
+    node_group_name        = "panda-node-20250807184914852600000014"
+    node_group_name_prefix = "panda-node-"
+    node_role_arn          = "arn:aws:iam::047310882558:role/panda-node-eks-node-group-20250807183824971400000001"
+    release_version        = "1.29.15-20250804"
+    resources              = [
+        {
+            autoscaling_groups              = [
+                {
+                    name = "eks-panda-node-20250807184914852600000014-96cc42ee-d8af-369f-a1e4-c92d7fc250ab"
+                },
+            ]
+            remote_access_security_group_id = null
+        },
+    ]
+    status                 = "ACTIVE"
+    subnet_ids             = [
+        "subnet-020e5215a6883a469",
+        "subnet-09bfcd7e4cf4cc21d",
+    ]
+    tags                   = {
+        "Environment" = "dev"
+        "Example"     = "amazon-prime-cluster"
+        "ExtraTag"    = "Panda_Node"
+        "Name"        = "panda-node"
+    }
+    tags_all               = {
+        "Environment" = "dev"
+        "Example"     = "amazon-prime-cluster"
+        "ExtraTag"    = "Panda_Node"
+        "Name"        = "panda-node"
+    }
+    version                = "1.29"
+
+    launch_template {
+        id      = "lt-0b6dd7d21aae421de"
+        name    = "panda-node-20250807184906373500000012"
+        version = "1"
+    }
+
+    scaling_config {
+        desired_size = 2
+        max_size     = 4
+        min_size     = 2
+    }
+
+    timeouts {}
+
+    update_config {
+        max_unavailable            = 0
+        max_unavailable_percentage = 33
+    }
+}
+
+# module.eks.module.eks_managed_node_group["panda-node"].aws_iam_role.this[0]:
+resource "aws_iam_role" "this" {
+    arn                   = "arn:aws:iam::047310882558:role/panda-node-eks-node-group-20250807183824971400000001"
+    assume_role_policy    = jsonencode(
+        {
+            Statement = [
+                {
+                    Action    = "sts:AssumeRole"
+                    Effect    = "Allow"
+                    Principal = {
+                        Service = "ec2.amazonaws.com"
+                    }
+                    Sid       = "EKSNodeAssumeRole"
+                },
+            ]
+            Version   = "2012-10-17"
+        }
+    )
+    create_date           = "2025-08-07T18:38:26Z"
+    description           = "EKS managed node group IAM role"
+    force_detach_policies = true
+    id                    = "panda-node-eks-node-group-20250807183824971400000001"
+    managed_policy_arns   = []
+    max_session_duration  = 3600
+    name                  = "panda-node-eks-node-group-20250807183824971400000001"
+    name_prefix           = "panda-node-eks-node-group-"
+    path                  = "/"
+    permissions_boundary  = null
+    tags                  = {
+        "Environment" = "dev"
+        "Example"     = "amazon-prime-cluster"
+        "ExtraTag"    = "Panda_Node"
+        "Name"        = "panda-node"
+    }
+    tags_all              = {
+        "Environment" = "dev"
+        "Example"     = "amazon-prime-cluster"
+        "ExtraTag"    = "Panda_Node"
+        "Name"        = "panda-node"
+    }
+    unique_id             = "AROAQWA7SY37P2QBBRSGM"
+}
+
+# module.eks.module.eks_managed_node_group["panda-node"].aws_iam_role_policy_attachment.this["arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"]:
+resource "aws_iam_role_policy_attachment" "this" {
+    id         = "panda-node-eks-node-group-20250807183824971400000001-20250807183828239900000004"
+    policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+    role       = "panda-node-eks-node-group-20250807183824971400000001"
+}
+
+# module.eks.module.eks_managed_node_group["panda-node"].aws_iam_role_policy_attachment.this["arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"]:
+resource "aws_iam_role_policy_attachment" "this" {
+    id         = "panda-node-eks-node-group-20250807183824971400000001-20250807183828557100000005"
+    policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
+    role       = "panda-node-eks-node-group-20250807183824971400000001"
+}
+
+# module.eks.module.eks_managed_node_group["panda-node"].aws_iam_role_policy_attachment.this["arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"]:
+resource "aws_iam_role_policy_attachment" "this" {
+    id         = "panda-node-eks-node-group-20250807183824971400000001-20250807183828140300000003"
+    policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
+    role       = "panda-node-eks-node-group-20250807183824971400000001"
+}
+
+# module.eks.module.eks_managed_node_group["panda-node"].aws_launch_template.this[0]:
+resource "aws_launch_template" "this" {
+    arn                                  = "arn:aws:ec2:us-east-1:047310882558:launch-template/lt-0b6dd7d21aae421de"
+    default_version                      = 1
+    description                          = "Custom launch template for panda-node EKS managed node group"
+    disable_api_stop                     = false
+    disable_api_termination              = false
+    ebs_optimized                        = null
+    id                                   = "lt-0b6dd7d21aae421de"
+    image_id                             = null
+    instance_initiated_shutdown_behavior = null
+    instance_type                        = null
+    kernel_id                            = null
+    key_name                             = null
+    latest_version                       = 1
+    name                                 = "panda-node-20250807184906373500000012"
+    name_prefix                          = "panda-node-"
+    ram_disk_id                          = null
+    tags                                 = {
+        "Environment" = "dev"
+        "Example"     = "amazon-prime-cluster"
+        "ExtraTag"    = "Panda_Node"
+        "Name"        = "panda-node"
+    }
+    tags_all                             = {
+        "Environment" = "dev"
+        "Example"     = "amazon-prime-cluster"
+        "ExtraTag"    = "Panda_Node"
+        "Name"        = "panda-node"
+    }
+    update_default_version               = true
+    user_data                            = null
+    vpc_security_group_ids               = [
+        "sg-0ab423fbe0de970ca",
+    ]
+
+    metadata_options {
+        http_endpoint               = "enabled"
+        http_protocol_ipv6          = null
+        http_put_response_hop_limit = 2
+        http_tokens                 = "required"
+        instance_metadata_tags      = null
+    }
+
+    monitoring {
+        enabled = true
+    }
+
+    tag_specifications {
+        resource_type = "instance"
+        tags          = {
+            "Environment" = "dev"
+            "Example"     = "amazon-prime-cluster"
+            "ExtraTag"    = "Panda_Node"
+            "Name"        = "panda-node"
+        }
+    }
+    tag_specifications {
+        resource_type = "network-interface"
+        tags          = {
+            "Environment" = "dev"
+            "Example"     = "amazon-prime-cluster"
+            "ExtraTag"    = "Panda_Node"
+            "Name"        = "panda-node"
+        }
+    }
+    tag_specifications {
+        resource_type = "volume"
+        tags          = {
+            "Environment" = "dev"
+            "Example"     = "amazon-prime-cluster"
+            "ExtraTag"    = "Panda_Node"
+            "Name"        = "panda-node"
+        }
+    }
+}
+
+
+# module.eks.module.kms.data.aws_caller_identity.current:
+data "aws_caller_identity" "current" {
+    account_id = "047310882558"
+    arn        = "arn:aws:iam::047310882558:user/demo-user"
+    id         = "047310882558"
+    user_id    = "AIDAQWA7SY37C6AE6FHPS"
+}
+
+# module.eks.module.kms.data.aws_iam_policy_document.this[0]:
+data "aws_iam_policy_document" "this" {
+    id            = "4204461971"
+    json          = jsonencode(
+        {
+            Statement = [
+                {
+                    Action    = [
+                        "kms:Update*",
+                        "kms:UntagResource",
+                        "kms:TagResource",
+                        "kms:ScheduleKeyDeletion",
+                        "kms:Revoke*",
+                        "kms:Put*",
+                        "kms:List*",
+                        "kms:Get*",
+                        "kms:Enable*",
+                        "kms:Disable*",
+                        "kms:Describe*",
+                        "kms:Delete*",
+                        "kms:Create*",
+                        "kms:CancelKeyDeletion",
+                    ]
+                    Effect    = "Allow"
+                    Principal = {
+                        AWS = "arn:aws:iam::047310882558:user/demo-user"
+                    }
+                    Resource  = "*"
+                    Sid       = "KeyAdministration"
+                },
+                {
+                    Action    = [
+                        "kms:ReEncrypt*",
+                        "kms:GenerateDataKey*",
+                        "kms:Encrypt",
+                        "kms:DescribeKey",
+                        "kms:Decrypt",
+                    ]
+                    Effect    = "Allow"
+                    Principal = {
+                        AWS = "arn:aws:iam::047310882558:role/amazon-prime-cluster-cluster-20250807183824971400000002"
+                    }
+                    Resource  = "*"
+                    Sid       = "KeyUsage"
+                },
+            ]
+            Version   = "2012-10-17"
+        }
+    )
+    minified_json = jsonencode(
+        {
+            Statement = [
+                {
+                    Action    = [
+                        "kms:Update*",
+                        "kms:UntagResource",
+                        "kms:TagResource",
+                        "kms:ScheduleKeyDeletion",
+                        "kms:Revoke*",
+                        "kms:Put*",
+                        "kms:List*",
+                        "kms:Get*",
+                        "kms:Enable*",
+                        "kms:Disable*",
+                        "kms:Describe*",
+                        "kms:Delete*",
+                        "kms:Create*",
+                        "kms:CancelKeyDeletion",
+                    ]
+                    Effect    = "Allow"
+                    Principal = {
+                        AWS = "arn:aws:iam::047310882558:user/demo-user"
+                    }
+                    Resource  = "*"
+                    Sid       = "KeyAdministration"
+                },
+                {
+                    Action    = [
+                        "kms:ReEncrypt*",
+                        "kms:GenerateDataKey*",
+                        "kms:Encrypt",
+                        "kms:DescribeKey",
+                        "kms:Decrypt",
+                    ]
+                    Effect    = "Allow"
+                    Principal = {
+                        AWS = "arn:aws:iam::047310882558:role/amazon-prime-cluster-cluster-20250807183824971400000002"
+                    }
+                    Resource  = "*"
+                    Sid       = "KeyUsage"
+                },
+            ]
+            Version   = "2012-10-17"
+        }
+    )
+    version       = "2012-10-17"
+
+    statement {
+        actions       = [
+            "kms:CancelKeyDeletion",
+            "kms:Create*",
+            "kms:Delete*",
+            "kms:Describe*",
+            "kms:Disable*",
+            "kms:Enable*",
+            "kms:Get*",
+            "kms:List*",
+            "kms:Put*",
+            "kms:Revoke*",
+            "kms:ScheduleKeyDeletion",
+            "kms:TagResource",
+            "kms:UntagResource",
+            "kms:Update*",
+        ]
+        effect        = "Allow"
+        not_actions   = []
+        not_resources = []
+        resources     = [
+            "*",
+        ]
+        sid           = "KeyAdministration"
+
+        principals {
+            identifiers = [
+                "arn:aws:iam::047310882558:user/demo-user",
+            ]
+            type        = "AWS"
+        }
+    }
+    statement {
+        actions       = [
+            "kms:Decrypt",
+            "kms:DescribeKey",
+            "kms:Encrypt",
+            "kms:GenerateDataKey*",
+            "kms:ReEncrypt*",
+        ]
+        effect        = "Allow"
+        not_actions   = []
+        not_resources = []
+        resources     = [
+            "*",
+        ]
+        sid           = "KeyUsage"
+
+        principals {
+            identifiers = [
+                "arn:aws:iam::047310882558:role/amazon-prime-cluster-cluster-20250807183824971400000002",
+            ]
+            type        = "AWS"
+        }
+    }
+}
+
+# module.eks.module.kms.data.aws_partition.current:
+data "aws_partition" "current" {
+    dns_suffix         = "amazonaws.com"
+    id                 = "aws"
+    partition          = "aws"
+    reverse_dns_prefix = "com.amazonaws"
+}
+
+# module.eks.module.kms.aws_kms_alias.this["cluster"]:
+resource "aws_kms_alias" "this" {
+    arn            = "arn:aws:kms:us-east-1:047310882558:alias/eks/amazon-prime-cluster"
+    id             = "alias/eks/amazon-prime-cluster"
+    name           = "alias/eks/amazon-prime-cluster"
+    name_prefix    = null
+    target_key_arn = "arn:aws:kms:us-east-1:047310882558:key/1faadc03-b407-43a6-8e16-0e759eb02733"
+    target_key_id  = "1faadc03-b407-43a6-8e16-0e759eb02733"
+}
+
+# module.eks.module.kms.aws_kms_key.this[0]:
+resource "aws_kms_key" "this" {
+    arn                                = "arn:aws:kms:us-east-1:047310882558:key/1faadc03-b407-43a6-8e16-0e759eb02733"
+    bypass_policy_lockout_safety_check = false
+    custom_key_store_id                = null
+    customer_master_key_spec           = "SYMMETRIC_DEFAULT"
+    description                        = "amazon-prime-cluster cluster encryption key"
+    enable_key_rotation                = true
+    id                                 = "1faadc03-b407-43a6-8e16-0e759eb02733"
+    is_enabled                         = true
+    key_id                             = "1faadc03-b407-43a6-8e16-0e759eb02733"
+    key_usage                          = "ENCRYPT_DECRYPT"
+    multi_region                       = false
+    policy                             = jsonencode(
+        {
+            Statement = [
+                {
+                    Action    = [
+                        "kms:Update*",
+                        "kms:UntagResource",
+                        "kms:TagResource",
+                        "kms:ScheduleKeyDeletion",
+                        "kms:Revoke*",
+                        "kms:Put*",
+                        "kms:List*",
+                        "kms:Get*",
+                        "kms:Enable*",
+                        "kms:Disable*",
+                        "kms:Describe*",
+                        "kms:Delete*",
+                        "kms:Create*",
+                        "kms:CancelKeyDeletion",
+                    ]
+                    Effect    = "Allow"
+                    Principal = {
+                        AWS = "arn:aws:iam::047310882558:user/demo-user"
+                    }
+                    Resource  = "*"
+                    Sid       = "KeyAdministration"
+                },
+                {
+                    Action    = [
+                        "kms:ReEncrypt*",
+                        "kms:GenerateDataKey*",
+                        "kms:Encrypt",
+                        "kms:DescribeKey",
+                        "kms:Decrypt",
+                    ]
+                    Effect    = "Allow"
+                    Principal = {
+                        AWS = "arn:aws:iam::047310882558:role/amazon-prime-cluster-cluster-20250807183824971400000002"
+                    }
+                    Resource  = "*"
+                    Sid       = "KeyUsage"
+                },
+            ]
+            Version   = "2012-10-17"
+        }
+    )
+    rotation_period_in_days            = 365
+    tags                               = {
+        "Environment" = "dev"
+        "Example"     = "amazon-prime-cluster"
+    }
+    tags_all                           = {
+        "Environment" = "dev"
+        "Example"     = "amazon-prime-cluster"
+    }
+    xks_key_id                         = null
+}
+# module.vpc.aws_default_network_acl.this[0]:
+resource "aws_default_network_acl" "this" {
+    arn                    = "arn:aws:ec2:us-east-1:047310882558:network-acl/acl-0d0108afcccefe64d"
+    default_network_acl_id = "acl-0d0108afcccefe64d"
+    id                     = "acl-0d0108afcccefe64d"
+    owner_id               = "047310882558"
+    subnet_ids             = [
+        "subnet-00c74a9e1d2db730f",
+        "subnet-020e5215a6883a469",
+        "subnet-03b347c4668b6c51e",
+        "subnet-088796006fe13eec7",
+        "subnet-09bfcd7e4cf4cc21d",
+        "subnet-0e094073387524232",
+    ]
+    tags                   = {
+        "Name" = "amazon-prime-cluster-default"
+    }
+    tags_all               = {
+        "Name" = "amazon-prime-cluster-default"
+    }
+    vpc_id                 = "vpc-03eaf812acbc2b9e4"
+
+    egress {
+        action          = "allow"
+        cidr_block      = null
+        from_port       = 0
+        ipv6_cidr_block = "::/0"
+        protocol        = "-1"
+        rule_no         = 101
+        to_port         = 0
+    }
+    egress {
+        action          = "allow"
+        cidr_block      = "0.0.0.0/0"
+        from_port       = 0
+        ipv6_cidr_block = null
+        protocol        = "-1"
+        rule_no         = 100
+        to_port         = 0
+    }
+
+    ingress {
+        action          = "allow"
+        cidr_block      = null
+        from_port       = 0
+        ipv6_cidr_block = "::/0"
+        protocol        = "-1"
+        rule_no         = 101
+        to_port         = 0
+    }
+    ingress {
+        action          = "allow"
+        cidr_block      = "0.0.0.0/0"
+        from_port       = 0
+        ipv6_cidr_block = null
+        protocol        = "-1"
+        rule_no         = 100
+        to_port         = 0
+    }
+}
+
+# module.vpc.aws_default_route_table.default[0]:
+resource "aws_default_route_table" "default" {
+    arn                    = "arn:aws:ec2:us-east-1:047310882558:route-table/rtb-03103cb12744b878a"
+    default_route_table_id = "rtb-03103cb12744b878a"
+    id                     = "rtb-03103cb12744b878a"
+    owner_id               = "047310882558"
+    route                  = []
+    tags                   = {
+        "Name" = "amazon-prime-cluster-default"
+    }
+    tags_all               = {
+        "Name" = "amazon-prime-cluster-default"
+    }
+    vpc_id                 = "vpc-03eaf812acbc2b9e4"
+
+    timeouts {
+        create = "5m"
+        update = "5m"
+    }
+}
+
+# module.vpc.aws_default_security_group.this[0]:
+resource "aws_default_security_group" "this" {
+    arn                    = "arn:aws:ec2:us-east-1:047310882558:security-group/sg-0107c19f4c553dc56"
+    description            = "default VPC security group"
+    egress                 = []
+    id                     = "sg-0107c19f4c553dc56"
+    ingress                = []
+    name                   = "default"
+    name_prefix            = null
+    owner_id               = "047310882558"
+    revoke_rules_on_delete = false
+    tags                   = {
+        "Name" = "amazon-prime-cluster-default"
+    }
+    tags_all               = {
+        "Name" = "amazon-prime-cluster-default"
+    }
+    vpc_id                 = "vpc-03eaf812acbc2b9e4"
+}
+
+# module.vpc.aws_eip.nat[0]:
+resource "aws_eip" "nat" {
+    allocation_id            = "eipalloc-046257ae809a0a360"
+    arn                      = "arn:aws:ec2:us-east-1:047310882558:elastic-ip/eipalloc-046257ae809a0a360"
+    association_id           = null
+    carrier_ip               = null
+    customer_owned_ip        = null
+    customer_owned_ipv4_pool = null
+    domain                   = "vpc"
+    id                       = "eipalloc-046257ae809a0a360"
+    instance                 = null
+    network_border_group     = "us-east-1"
+    network_interface        = null
+    private_ip               = null
+    ptr_record               = null
+    public_dns               = "ec2-98-87-72-5.compute-1.amazonaws.com"
+    public_ip                = "98.87.72.5"
+    public_ipv4_pool         = "amazon"
+    tags                     = {
+        "Name" = "amazon-prime-cluster-us-east-1a"
+    }
+    tags_all                 = {
+        "Name" = "amazon-prime-cluster-us-east-1a"
+    }
+    vpc                      = true
+}
+
+# module.vpc.aws_eip.nat[1]:
+resource "aws_eip" "nat" {
+    allocation_id            = "eipalloc-0af0fbf0f43bc239d"
+    arn                      = "arn:aws:ec2:us-east-1:047310882558:elastic-ip/eipalloc-0af0fbf0f43bc239d"
+    association_id           = null
+    carrier_ip               = null
+    customer_owned_ip        = null
+    customer_owned_ipv4_pool = null
+    domain                   = "vpc"
+    id                       = "eipalloc-0af0fbf0f43bc239d"
+    instance                 = null
+    network_border_group     = "us-east-1"
+    network_interface        = null
+    private_ip               = null
+    ptr_record               = null
+    public_dns               = "ec2-18-207-146-88.compute-1.amazonaws.com"
+    public_ip                = "18.207.146.88"
+    public_ipv4_pool         = "amazon"
+    tags                     = {
+        "Name" = "amazon-prime-cluster-us-east-1b"
+    }
+    tags_all                 = {
+        "Name" = "amazon-prime-cluster-us-east-1b"
+    }
+    vpc                      = true
+}
+
+# module.vpc.aws_internet_gateway.this[0]:
+resource "aws_internet_gateway" "this" {
+    arn      = "arn:aws:ec2:us-east-1:047310882558:internet-gateway/igw-0656b26816510dba0"
+    id       = "igw-0656b26816510dba0"
+    owner_id = "047310882558"
+    tags     = {
+        "Name" = "amazon-prime-cluster"
+    }
+    tags_all = {
+        "Name" = "amazon-prime-cluster"
+    }
+    vpc_id   = "vpc-03eaf812acbc2b9e4"
+}
+
+# module.vpc.aws_nat_gateway.this[0]:
+resource "aws_nat_gateway" "this" {
+    allocation_id                      = "eipalloc-046257ae809a0a360"
+    association_id                     = "eipassoc-00527aaba1f2b518b"
+    connectivity_type                  = "public"
+    id                                 = "nat-008c21ebeff236427"
+    network_interface_id               = "eni-0c04194b336b15016"
+    private_ip                         = "10.0.1.136"
+    public_ip                          = "98.87.72.5"
+    secondary_private_ip_address_count = 0
+    secondary_private_ip_addresses     = []
+    subnet_id                          = "subnet-03b347c4668b6c51e"
+    tags                               = {
+        "Name" = "amazon-prime-cluster-us-east-1a"
+    }
+    tags_all                           = {
+        "Name" = "amazon-prime-cluster-us-east-1a"
+    }
+}
+
+# module.vpc.aws_nat_gateway.this[1]:
+resource "aws_nat_gateway" "this" {
+    allocation_id                      = "eipalloc-0af0fbf0f43bc239d"
+    association_id                     = "eipassoc-0c4d0a04425265760"
+    connectivity_type                  = "public"
+    id                                 = "nat-00ab3a5fa241bb649"
+    network_interface_id               = "eni-03a6e90ad96b6324b"
+    private_ip                         = "10.0.2.236"
+    public_ip                          = "18.207.146.88"
+    secondary_private_ip_address_count = 0
+    secondary_private_ip_addresses     = []
+    subnet_id                          = "subnet-00c74a9e1d2db730f"
+    tags                               = {
+        "Name" = "amazon-prime-cluster-us-east-1b"
+    }
+    tags_all                           = {
+        "Name" = "amazon-prime-cluster-us-east-1b"
+    }
+}
+
+# module.vpc.aws_route.private_nat_gateway[0]:
+resource "aws_route" "private_nat_gateway" {
+    carrier_gateway_id          = null
+    core_network_arn            = null
+    destination_cidr_block      = "0.0.0.0/0"
+    destination_ipv6_cidr_block = null
+    destination_prefix_list_id  = null
+    egress_only_gateway_id      = null
+    gateway_id                  = null
+    id                          = "r-rtb-050d031db67ad04ac1080289494"
+    instance_id                 = null
+    instance_owner_id           = null
+    local_gateway_id            = null
+    nat_gateway_id              = "nat-008c21ebeff236427"
+    network_interface_id        = null
+    origin                      = "CreateRoute"
+    route_table_id              = "rtb-050d031db67ad04ac"
+    state                       = "active"
+    transit_gateway_id          = null
+    vpc_endpoint_id             = null
+    vpc_peering_connection_id   = null
+
+    timeouts {
+        create = "5m"
+    }
+}
+
+# module.vpc.aws_route.private_nat_gateway[1]:
+resource "aws_route" "private_nat_gateway" {
+    carrier_gateway_id          = null
+    core_network_arn            = null
+    destination_cidr_block      = "0.0.0.0/0"
+    destination_ipv6_cidr_block = null
+    destination_prefix_list_id  = null
+    egress_only_gateway_id      = null
+    gateway_id                  = null
+    id                          = "r-rtb-098cf3e303f9f47ef1080289494"
+    instance_id                 = null
+    instance_owner_id           = null
+    local_gateway_id            = null
+    nat_gateway_id              = "nat-00ab3a5fa241bb649"
+    network_interface_id        = null
+    origin                      = "CreateRoute"
+    route_table_id              = "rtb-098cf3e303f9f47ef"
+    state                       = "active"
+    transit_gateway_id          = null
+    vpc_endpoint_id             = null
+    vpc_peering_connection_id   = null
+
+    timeouts {
+        create = "5m"
+    }
+}
+
+# module.vpc.aws_route.public_internet_gateway[0]:
+resource "aws_route" "public_internet_gateway" {
+    carrier_gateway_id          = null
+    core_network_arn            = null
+    destination_cidr_block      = "0.0.0.0/0"
+    destination_ipv6_cidr_block = null
+    destination_prefix_list_id  = null
+    egress_only_gateway_id      = null
+    gateway_id                  = "igw-0656b26816510dba0"
+    id                          = "r-rtb-06e9bf42183ea7fe11080289494"
+    instance_id                 = null
+    instance_owner_id           = null
+    local_gateway_id            = null
+    nat_gateway_id              = null
+    network_interface_id        = null
+    origin                      = "CreateRoute"
+    route_table_id              = "rtb-06e9bf42183ea7fe1"
+    state                       = "active"
+    transit_gateway_id          = null
+    vpc_endpoint_id             = null
+    vpc_peering_connection_id   = null
+
+    timeouts {
+        create = "5m"
+    }
+}
+
+# module.vpc.aws_route_table.intra[0]:
+resource "aws_route_table" "intra" {
+    arn              = "arn:aws:ec2:us-east-1:047310882558:route-table/rtb-05cc0722fd1773a66"
+    id               = "rtb-05cc0722fd1773a66"
+    owner_id         = "047310882558"
+    propagating_vgws = []
+    route            = []
+    tags             = {
+        "Name" = "amazon-prime-cluster-intra"
+    }
+    tags_all         = {
+        "Name" = "amazon-prime-cluster-intra"
+    }
+    vpc_id           = "vpc-03eaf812acbc2b9e4"
+}
+
+# module.vpc.aws_route_table.private[0]:
+resource "aws_route_table" "private" {
+    arn              = "arn:aws:ec2:us-east-1:047310882558:route-table/rtb-050d031db67ad04ac"
+    id               = "rtb-050d031db67ad04ac"
+    owner_id         = "047310882558"
+    propagating_vgws = []
+    route            = []
+    tags             = {
+        "Name" = "amazon-prime-cluster-private-us-east-1a"
+    }
+    tags_all         = {
+        "Name" = "amazon-prime-cluster-private-us-east-1a"
+    }
+    vpc_id           = "vpc-03eaf812acbc2b9e4"
+}
+
+# module.vpc.aws_route_table.private[1]:
+resource "aws_route_table" "private" {
+    arn              = "arn:aws:ec2:us-east-1:047310882558:route-table/rtb-098cf3e303f9f47ef"
+    id               = "rtb-098cf3e303f9f47ef"
+    owner_id         = "047310882558"
+    propagating_vgws = []
+    route            = []
+    tags             = {
+        "Name" = "amazon-prime-cluster-private-us-east-1b"
+    }
+    tags_all         = {
+        "Name" = "amazon-prime-cluster-private-us-east-1b"
+    }
+    vpc_id           = "vpc-03eaf812acbc2b9e4"
+}
+
+# module.vpc.aws_route_table.public[0]:
+resource "aws_route_table" "public" {
+    arn              = "arn:aws:ec2:us-east-1:047310882558:route-table/rtb-06e9bf42183ea7fe1"
+    id               = "rtb-06e9bf42183ea7fe1"
+    owner_id         = "047310882558"
+    propagating_vgws = []
+    route            = []
+    tags             = {
+        "Name" = "amazon-prime-cluster-public"
+    }
+    tags_all         = {
+        "Name" = "amazon-prime-cluster-public"
+    }
+    vpc_id           = "vpc-03eaf812acbc2b9e4"
+}
+
+# module.vpc.aws_route_table_association.intra[0]:
+resource "aws_route_table_association" "intra" {
+    gateway_id     = null
+    id             = "rtbassoc-06a7aeb963792ac59"
+    route_table_id = "rtb-05cc0722fd1773a66"
+    subnet_id      = "subnet-088796006fe13eec7"
+}
+
+# module.vpc.aws_route_table_association.intra[1]:
+resource "aws_route_table_association" "intra" {
+    gateway_id     = null
+    id             = "rtbassoc-06c9f9c79d8ebc428"
+    route_table_id = "rtb-05cc0722fd1773a66"
+    subnet_id      = "subnet-0e094073387524232"
+}
+
+# module.vpc.aws_route_table_association.private[0]:
+resource "aws_route_table_association" "private" {
+    gateway_id     = null
+    id             = "rtbassoc-064913f15834ba0e9"
+    route_table_id = "rtb-050d031db67ad04ac"
+    subnet_id      = "subnet-09bfcd7e4cf4cc21d"
+}
+
+# module.vpc.aws_route_table_association.private[1]:
+resource "aws_route_table_association" "private" {
+    gateway_id     = null
+    id             = "rtbassoc-0a0d168ce99b790b7"
+    route_table_id = "rtb-098cf3e303f9f47ef"
+    subnet_id      = "subnet-020e5215a6883a469"
+}
+
+# module.vpc.aws_route_table_association.public[0]:
+resource "aws_route_table_association" "public" {
+    gateway_id     = null
+    id             = "rtbassoc-0b34525bebd48bd57"
+    route_table_id = "rtb-06e9bf42183ea7fe1"
+    subnet_id      = "subnet-03b347c4668b6c51e"
+}
+
+# module.vpc.aws_route_table_association.public[1]:
+resource "aws_route_table_association" "public" {
+    gateway_id     = null
+    id             = "rtbassoc-01a81579728c3b418"
+    route_table_id = "rtb-06e9bf42183ea7fe1"
+    subnet_id      = "subnet-00c74a9e1d2db730f"
+}
+
+# module.vpc.aws_subnet.intra[0]:
+resource "aws_subnet" "intra" {
+    arn                                            = "arn:aws:ec2:us-east-1:047310882558:subnet/subnet-088796006fe13eec7"
+    assign_ipv6_address_on_creation                = false
+    availability_zone                              = "us-east-1a"
+    availability_zone_id                           = "use1-az1"
+    cidr_block                                     = "10.0.5.0/24"
+    customer_owned_ipv4_pool                       = null
+    enable_dns64                                   = false
+    enable_lni_at_device_index                     = 0
+    enable_resource_name_dns_a_record_on_launch    = false
+    enable_resource_name_dns_aaaa_record_on_launch = false
+    id                                             = "subnet-088796006fe13eec7"
+    ipv6_cidr_block                                = null
+    ipv6_cidr_block_association_id                 = null
+    ipv6_native                                    = false
+    map_customer_owned_ip_on_launch                = false
+    map_public_ip_on_launch                        = false
+    outpost_arn                                    = null
+    owner_id                                       = "047310882558"
+    private_dns_hostname_type_on_launch            = "ip-name"
+    tags                                           = {
+        "Name" = "amazon-prime-cluster-intra-us-east-1a"
+    }
+    tags_all                                       = {
+        "Name" = "amazon-prime-cluster-intra-us-east-1a"
+    }
+    vpc_id                                         = "vpc-03eaf812acbc2b9e4"
+}
+
+# module.vpc.aws_subnet.intra[1]:
+resource "aws_subnet" "intra" {
+    arn                                            = "arn:aws:ec2:us-east-1:047310882558:subnet/subnet-0e094073387524232"
+    assign_ipv6_address_on_creation                = false
+    availability_zone                              = "us-east-1b"
+    availability_zone_id                           = "use1-az2"
+    cidr_block                                     = "10.0.6.0/24"
+    customer_owned_ipv4_pool                       = null
+    enable_dns64                                   = false
+    enable_lni_at_device_index                     = 0
+    enable_resource_name_dns_a_record_on_launch    = false
+    enable_resource_name_dns_aaaa_record_on_launch = false
+    id                                             = "subnet-0e094073387524232"
+    ipv6_cidr_block                                = null
+    ipv6_cidr_block_association_id                 = null
+    ipv6_native                                    = false
+    map_customer_owned_ip_on_launch                = false
+    map_public_ip_on_launch                        = false
+    outpost_arn                                    = null
+    owner_id                                       = "047310882558"
+    private_dns_hostname_type_on_launch            = "ip-name"
+    tags                                           = {
+        "Name" = "amazon-prime-cluster-intra-us-east-1b"
+    }
+    tags_all                                       = {
+        "Name" = "amazon-prime-cluster-intra-us-east-1b"
+    }
+    vpc_id                                         = "vpc-03eaf812acbc2b9e4"
+}
+
+# module.vpc.aws_subnet.private[0]:
+resource "aws_subnet" "private" {
+    arn                                            = "arn:aws:ec2:us-east-1:047310882558:subnet/subnet-09bfcd7e4cf4cc21d"
+    assign_ipv6_address_on_creation                = false
+    availability_zone                              = "us-east-1a"
+    availability_zone_id                           = "use1-az1"
+    cidr_block                                     = "10.0.3.0/24"
+    customer_owned_ipv4_pool                       = null
+    enable_dns64                                   = false
+    enable_lni_at_device_index                     = 0
+    enable_resource_name_dns_a_record_on_launch    = false
+    enable_resource_name_dns_aaaa_record_on_launch = false
+    id                                             = "subnet-09bfcd7e4cf4cc21d"
+    ipv6_cidr_block                                = null
+    ipv6_cidr_block_association_id                 = null
+    ipv6_native                                    = false
+    map_customer_owned_ip_on_launch                = false
+    map_public_ip_on_launch                        = false
+    outpost_arn                                    = null
+    owner_id                                       = "047310882558"
+    private_dns_hostname_type_on_launch            = "ip-name"
+    tags                                           = {
+        "Name"                            = "amazon-prime-cluster-private-us-east-1a"
+        "kubernetes.io/role/internal-elb" = "1"
+    }
+    tags_all                                       = {
+        "Name"                            = "amazon-prime-cluster-private-us-east-1a"
+        "kubernetes.io/role/internal-elb" = "1"
+    }
+    vpc_id                                         = "vpc-03eaf812acbc2b9e4"
+}
+
+# module.vpc.aws_subnet.private[1]:
+resource "aws_subnet" "private" {
+    arn                                            = "arn:aws:ec2:us-east-1:047310882558:subnet/subnet-020e5215a6883a469"
+    assign_ipv6_address_on_creation                = false
+    availability_zone                              = "us-east-1b"
+    availability_zone_id                           = "use1-az2"
+    cidr_block                                     = "10.0.4.0/24"
+    customer_owned_ipv4_pool                       = null
+    enable_dns64                                   = false
+    enable_lni_at_device_index                     = 0
+    enable_resource_name_dns_a_record_on_launch    = false
+    enable_resource_name_dns_aaaa_record_on_launch = false
+    id                                             = "subnet-020e5215a6883a469"
+    ipv6_cidr_block                                = null
+    ipv6_cidr_block_association_id                 = null
+    ipv6_native                                    = false
+    map_customer_owned_ip_on_launch                = false
+    map_public_ip_on_launch                        = false
+    outpost_arn                                    = null
+    owner_id                                       = "047310882558"
+    private_dns_hostname_type_on_launch            = "ip-name"
+    tags                                           = {
+        "Name"                            = "amazon-prime-cluster-private-us-east-1b"
+        "kubernetes.io/role/internal-elb" = "1"
+    }
+    tags_all                                       = {
+        "Name"                            = "amazon-prime-cluster-private-us-east-1b"
+        "kubernetes.io/role/internal-elb" = "1"
+    }
+    vpc_id                                         = "vpc-03eaf812acbc2b9e4"
+}
+
+# module.vpc.aws_subnet.public[0]:
+resource "aws_subnet" "public" {
+    arn                                            = "arn:aws:ec2:us-east-1:047310882558:subnet/subnet-03b347c4668b6c51e"
+    assign_ipv6_address_on_creation                = false
+    availability_zone                              = "us-east-1a"
+    availability_zone_id                           = "use1-az1"
+    cidr_block                                     = "10.0.1.0/24"
+    customer_owned_ipv4_pool                       = null
+    enable_dns64                                   = false
+    enable_lni_at_device_index                     = 0
+    enable_resource_name_dns_a_record_on_launch    = false
+    enable_resource_name_dns_aaaa_record_on_launch = false
+    id                                             = "subnet-03b347c4668b6c51e"
+    ipv6_cidr_block                                = null
+    ipv6_cidr_block_association_id                 = null
+    ipv6_native                                    = false
+    map_customer_owned_ip_on_launch                = false
+    map_public_ip_on_launch                        = false
+    outpost_arn                                    = null
+    owner_id                                       = "047310882558"
+    private_dns_hostname_type_on_launch            = "ip-name"
+    tags                                           = {
+        "Name"                   = "amazon-prime-cluster-public-us-east-1a"
+        "kubernetes.io/role/elb" = "1"
+    }
+    tags_all                                       = {
+        "Name"                   = "amazon-prime-cluster-public-us-east-1a"
+        "kubernetes.io/role/elb" = "1"
+    }
+    vpc_id                                         = "vpc-03eaf812acbc2b9e4"
+}
+
+# module.vpc.aws_subnet.public[1]:
+resource "aws_subnet" "public" {
+    arn                                            = "arn:aws:ec2:us-east-1:047310882558:subnet/subnet-00c74a9e1d2db730f"
+    assign_ipv6_address_on_creation                = false
+    availability_zone                              = "us-east-1b"
+    availability_zone_id                           = "use1-az2"
+    cidr_block                                     = "10.0.2.0/24"
+    customer_owned_ipv4_pool                       = null
+    enable_dns64                                   = false
+    enable_lni_at_device_index                     = 0
+    enable_resource_name_dns_a_record_on_launch    = false
+    enable_resource_name_dns_aaaa_record_on_launch = false
+    id                                             = "subnet-00c74a9e1d2db730f"
+    ipv6_cidr_block                                = null
+    ipv6_cidr_block_association_id                 = null
+    ipv6_native                                    = false
+    map_customer_owned_ip_on_launch                = false
+    map_public_ip_on_launch                        = false
+    outpost_arn                                    = null
+    owner_id                                       = "047310882558"
+    private_dns_hostname_type_on_launch            = "ip-name"
+    tags                                           = {
+        "Name"                   = "amazon-prime-cluster-public-us-east-1b"
+        "kubernetes.io/role/elb" = "1"
+    }
+    tags_all                                       = {
+        "Name"                   = "amazon-prime-cluster-public-us-east-1b"
+        "kubernetes.io/role/elb" = "1"
+    }
+    vpc_id                                         = "vpc-03eaf812acbc2b9e4"
+}
+
+# module.vpc.aws_vpc.this[0]:
+resource "aws_vpc" "this" {
+    arn                                  = "arn:aws:ec2:us-east-1:047310882558:vpc/vpc-03eaf812acbc2b9e4"
+    assign_generated_ipv6_cidr_block     = false
+    cidr_block                           = "10.0.0.0/16"
+    default_network_acl_id               = "acl-0d0108afcccefe64d"
+    default_route_table_id               = "rtb-03103cb12744b878a"
+    default_security_group_id            = "sg-0107c19f4c553dc56"
+    dhcp_options_id                      = "dopt-076dc6934de7f2d2b"
+    enable_dns_hostnames                 = true
+    enable_dns_support                   = true
+    enable_network_address_usage_metrics = false
+    id                                   = "vpc-03eaf812acbc2b9e4"
+    instance_tenancy                     = "default"
+    ipv6_association_id                  = null
+    ipv6_cidr_block                      = null
+    ipv6_cidr_block_network_border_group = null
+    ipv6_ipam_pool_id                    = null
+    ipv6_netmask_length                  = 0
+    main_route_table_id                  = "rtb-03103cb12744b878a"
+    owner_id                             = "047310882558"
+    tags                                 = {
+        "Name" = "amazon-prime-cluster"
+    }
+    tags_all                             = {
+        "Name" = "amazon-prime-cluster"
+    }
+}
