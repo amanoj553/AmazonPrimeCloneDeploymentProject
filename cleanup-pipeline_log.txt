@@ -1,0 +1,158 @@
+Started by user amanoj
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/cleanup-pipeline
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Login to EKS)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] withCredentials
+Masking supported pattern matches of $AWS_ACCESS_KEY or $AWS_SECRET_KEY
+[Pipeline] {
+[Pipeline] sh
++ aws eks --region us-east-1 update-kubeconfig --name amazon-prime-cluster
+Updated context arn:aws:eks:us-east-1:047310882558:cluster/amazon-prime-cluster in /var/lib/jenkins/.kube/config
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Cleanup K8s Resources)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ kubectl delete svc kubernetes
+service "kubernetes" deleted
+[Pipeline] sh
++ kubectl delete deploy pandacloud-app
+deployment.apps "pandacloud-app" deleted
+[Pipeline] sh
++ kubectl delete svc pandacloud-app
+service "pandacloud-app" deleted
+[Pipeline] sh
++ kubectl delete -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+Warning: deleting cluster-scoped resources, not scoped to the provided namespace
+customresourcedefinition.apiextensions.k8s.io "applications.argoproj.io" deleted
+customresourcedefinition.apiextensions.k8s.io "applicationsets.argoproj.io" deleted
+customresourcedefinition.apiextensions.k8s.io "appprojects.argoproj.io" deleted
+serviceaccount "argocd-application-controller" deleted
+serviceaccount "argocd-applicationset-controller" deleted
+serviceaccount "argocd-dex-server" deleted
+serviceaccount "argocd-notifications-controller" deleted
+serviceaccount "argocd-redis" deleted
+serviceaccount "argocd-repo-server" deleted
+serviceaccount "argocd-server" deleted
+role.rbac.authorization.k8s.io "argocd-application-controller" deleted
+role.rbac.authorization.k8s.io "argocd-applicationset-controller" deleted
+role.rbac.authorization.k8s.io "argocd-dex-server" deleted
+role.rbac.authorization.k8s.io "argocd-notifications-controller" deleted
+role.rbac.authorization.k8s.io "argocd-redis" deleted
+role.rbac.authorization.k8s.io "argocd-server" deleted
+clusterrole.rbac.authorization.k8s.io "argocd-application-controller" deleted
+clusterrole.rbac.authorization.k8s.io "argocd-applicationset-controller" deleted
+clusterrole.rbac.authorization.k8s.io "argocd-server" deleted
+rolebinding.rbac.authorization.k8s.io "argocd-application-controller" deleted
+rolebinding.rbac.authorization.k8s.io "argocd-applicationset-controller" deleted
+rolebinding.rbac.authorization.k8s.io "argocd-dex-server" deleted
+rolebinding.rbac.authorization.k8s.io "argocd-notifications-controller" deleted
+rolebinding.rbac.authorization.k8s.io "argocd-redis" deleted
+rolebinding.rbac.authorization.k8s.io "argocd-server" deleted
+clusterrolebinding.rbac.authorization.k8s.io "argocd-application-controller" deleted
+clusterrolebinding.rbac.authorization.k8s.io "argocd-applicationset-controller" deleted
+clusterrolebinding.rbac.authorization.k8s.io "argocd-server" deleted
+configmap "argocd-cm" deleted
+configmap "argocd-cmd-params-cm" deleted
+configmap "argocd-gpg-keys-cm" deleted
+configmap "argocd-notifications-cm" deleted
+configmap "argocd-rbac-cm" deleted
+configmap "argocd-ssh-known-hosts-cm" deleted
+configmap "argocd-tls-certs-cm" deleted
+secret "argocd-notifications-secret" deleted
+secret "argocd-secret" deleted
+service "argocd-applicationset-controller" deleted
+service "argocd-dex-server" deleted
+service "argocd-metrics" deleted
+service "argocd-notifications-controller-metrics" deleted
+service "argocd-redis" deleted
+service "argocd-repo-server" deleted
+service "argocd-server" deleted
+service "argocd-server-metrics" deleted
+deployment.apps "argocd-applicationset-controller" deleted
+deployment.apps "argocd-dex-server" deleted
+deployment.apps "argocd-notifications-controller" deleted
+deployment.apps "argocd-redis" deleted
+deployment.apps "argocd-repo-server" deleted
+deployment.apps "argocd-server" deleted
+statefulset.apps "argocd-application-controller" deleted
+networkpolicy.networking.k8s.io "argocd-application-controller-network-policy" deleted
+networkpolicy.networking.k8s.io "argocd-applicationset-controller-network-policy" deleted
+networkpolicy.networking.k8s.io "argocd-dex-server-network-policy" deleted
+networkpolicy.networking.k8s.io "argocd-notifications-controller-network-policy" deleted
+networkpolicy.networking.k8s.io "argocd-redis-network-policy" deleted
+networkpolicy.networking.k8s.io "argocd-repo-server-network-policy" deleted
+networkpolicy.networking.k8s.io "argocd-server-network-policy" deleted
+[Pipeline] sh
++ kubectl delete namespace argocd
+namespace "argocd" deleted
+[Pipeline] sh
++ helm list -n prometheus
+NAME  	NAMESPACE 	REVISION	UPDATED                                	STATUS  	CHART                        	APP VERSION
+stable	prometheus	3       	2025-08-07 20:23:58.622256876 +0000 UTC	deployed	kube-prometheus-stack-75.18.1	v0.83.0    
+[Pipeline] sh
++ helm uninstall kube-stack -n prometheus
+Error: uninstall: Release not loaded: kube-stack: release: not found
++ true
+[Pipeline] sh
++ kubectl delete namespace prometheus
+namespace "prometheus" deleted
+[Pipeline] sh
++ helm repo remove stable
+"stable" has been removed from your repositories
+[Pipeline] sh
++ helm repo remove prometheus-community
+"prometheus-community" has been removed from your repositories
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Delete ECR Repository and KMS Keys)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ aws ecr delete-repository --repository-name amazon-prime --region us-east-1 --force
+{
+    "repository": {
+        "repositoryArn": "arn:aws:ecr:us-east-1:047310882558:repository/amazon-prime",
+        "registryId": "047310882558",
+        "repositoryName": "amazon-prime",
+        "repositoryUri": "047310882558.dkr.ecr.us-east-1.amazonaws.com/amazon-prime",
+        "createdAt": "2025-08-07T17:15:38.291000+00:00",
+        "imageTagMutability": "MUTABLE"
+    }
+}
+[Pipeline] sh
++ aws kms list-keys --region us-east-1 --query Keys[*].KeyId --output text
++ aws kms disable-key --key-id 1faadc03-b407-43a6-8e16-0e759eb02733 --region us-east-1
++ aws kms schedule-key-deletion --key-id 1faadc03-b407-43a6-8e16-0e759eb02733 --pending-window-in-days 7 --region us-east-1
+{
+    "KeyId": "arn:aws:kms:us-east-1:047310882558:key/1faadc03-b407-43a6-8e16-0e759eb02733",
+    "DeletionDate": "2025-08-14T20:45:53.623000+00:00",
+    "KeyState": "PendingDeletion",
+    "PendingWindowInDays": 7
+}
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
