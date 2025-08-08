@@ -355,15 +355,19 @@ pipeline {
 
 ### All tools configuration screenshots – amazon prime NodeJS app deployment using ArgoCD:
 
+![Build_setup](img9.JPG)
+
+![Build_setup](img10.JPG)
+
 ![Build_setup](img1.JPG)
 
 ![Build_setup](img2.JPG)
 
+![Build_setup](img5.JPG)
+
 ![Build_setup](img3.JPG)
 
 ![Build_setup](img4.JPG)
-
-![Build_setup](img5.JPG)
 
 ![Build_setup](img6.JPG)
 
@@ -371,39 +375,30 @@ pipeline {
 
 ![Build_setup](img8.JPG)
 
-![Build_setup](img9.JPG)
-
-![Build_setup](img10.JPG)
-
-![Build_setup](img11.JPG)
-
 ![Build_setup](img12.JPG)
 
 ![Build_setup](img13.JPG)
+
+![Build_setup](img11.JPG)
 
 ![Build_setup](img14.JPG)
 
 ![Build_setup](img15.JPG)
 
-![Build_setup](img16.JPG)
+![Build_setup](img21.JPG)
 
 ![Build_setup](img17.JPG)
 
 ![Build_setup](img18.JPG)
 
-![Build_setup](img19.JPG)
-
 ![Build_setup](img20.JPG)
-
-![Build_setup](img21.JPG)
 
 ![Build_setup](img22.JPG)
 
 ### Build Success Screenshots – amazon prime NodeJS app deployment using ArgoCD:
 
+![Build_setup](img16.JPG)
 
-
-## Additional Information
-For further details, refer to the word document containing a complete write-up of the project.
+![Build_setup](img19.JPG)
 
 ---
